@@ -13,12 +13,15 @@ $db = new PDO ("mysql:host=$hostname;dbname=$database",$username,$password);
 // initial response code
 // response code will be changed if the request goes into any of the process
 
+// Retrieve JSON data from the request
+$json_data = file_get_contents("php://input");
+
+// Decode JSON data
+$data = json_decode($json_data, true);
+
 http_response_code(404);
 $response = new stdClass();
 
-{
-	$jsonbody = json_decode(file_get_contents('php://input'));
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
@@ -31,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		isset($_POST['password']) &&
 		isset($_POST['accessStatus'])&&
 		isset($_POST['country']) &&
-		isset($_POST['role_id']) &&
+		isset($_POST['roleId']) &&
 		isset($_POST['points'])) {
 
 			$firstName = $_POST['firstName'];
@@ -43,13 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$password = $_POST['password'];
 			$accessStatus = $_POST['accessStatus'];
 			$country = $_POST['country'];
-			$roleId = $_POST['role_id'];
+			$roleId = $_POST['roleId'];
 			$points = $_POST['points'];
 			
             // Check if the email already exists
             $stmt = $db->prepare("SELECT email FROM appuser WHERE email=:email");
             $stmt->bindParam(':email', $email);
-			
+			$stmt->execute();
 			
             if ($stmt->rowCount() > 0) {
 //$response = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -58,23 +61,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $response->error = "Email is already registered";
             } else {
                 // Insert the new user
-                $stmt = $db->prepare("INSERT INTO appuser (`firstName`,`lastName`,`nickName`,`dateOfBirth`,`phoneNumber`,`email`,`password`,`accessStatus`,`country`,`role_id`,`points`) 
-                    VALUES (:firstName, :lastName, :nickName, :dateOfBirth, :phoneNumber, :email, :password, :accessStatus, :country, :role_id, :points)");
+                $stmt = $db->prepare("INSERT INTO appuser (`firstName`,`lastName`,`nickName`,`dateOfBirth`,`phoneNumber`,`email`,`password`,`accessStatus`,`country`,`roleId`,`points`) 
+                    VALUES (:firstName, :lastName, :nickName, :dateOfBirth, :phoneNumber, :email, :password, :accessStatus, :country, :roleId, :points)");
+					$stmt->bindParam(':firstName', $firstName);
+					$stmt->bindParam(':lastName', $lastName);
+					$stmt->bindParam(':nickName', $nickName);
+					$stmt->bindParam(':dateOfBirth', $dateOfBirth);
+					$stmt->bindParam(':phoneNumber', $phoneNumber);
+					$stmt->bindParam(':email', $email);
+					$stmt->bindParam(':password', $password);
+					$stmt->bindParam(':accessStatus', $accessStatus);
+					$stmt->bindParam(':country', $country);
+					$stmt->bindParam(':roleId', $roleId);
+					$stmt->bindParam(':points', $points);
 
-
-                $stmt->execute([
-                    'firstName' => $userData['firstName'],
-					'lastName' => $userData['lastName'],
-					'nickName' => $userData['nickName'],
-					'dateOfBirth' => $userData['dateOfBirth'],
-					'phoneNumber' => $userData['phoneNumber'],
-					'email' => $userData['email'],
-					'password' => $userData['password'],
-					'accessStatus' => $userData['accessStatus'],
-					'country' => $userData['country'],
-					'role_id' => $userData['role_id'], // Include roleId in the response
-					'points' => $userData['points'],
-                ]);
+                $stmt->execute();
 
                 http_response_code(200);
 				$response->error = "Successfully registered";

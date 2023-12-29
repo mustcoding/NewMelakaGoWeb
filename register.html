@@ -395,19 +395,20 @@
           var roleId = $("#role_id").val();
           var email = $("#email").val();
           var password = $("#password").val();
+          var accessStatus = "ACTIVE";
+          var points = 0;
 
           if (formSubmitted) 
           {
             return;  // If the form has already been submitted, do nothing
           }
 
-        if ($("form").validate().form()) 
-        {
           // AJAX call
           $.ajax
           ({
             type: "POST",
             url: "melakago_php/appuser.php",
+            contentType: 'application/x-www-form-urlencoded',
             data: {
                 firstName: firstName,
                 lastName: lastName,
@@ -416,10 +417,10 @@
                 phoneNumber: phoneNumber,
                 email: email,
                 password: password,
-                accessStatus: "ACTIVE",
+                accessStatus: accessStatus,
                 country: country,
-                role_id: role_id,
-                points: 0
+                roleId: roleId,
+                points: points
             },
             success: function(response) {
               console.log('Response:',response);
@@ -439,12 +440,24 @@
                 }
 
               console.log("You're here");
+              console.log('here',firstName);
+              console.log('here',lastName);
+              console.log('here',nickName);
+              console.log('here',dateOfBirth);
+              console.log('here',firstName);
+              console.log('here',phoneNumber);
+              console.log('here',email);
+              console.log('here',password);
+              console.log('here',accessStatus);
+              console.log('here',country);
+              console.log('here',roleId);
+              console.log('here',points);
             }
           });
 
           formSubmitted = true;
 
-        }
+        
 
       });
 
@@ -452,7 +465,7 @@
 
     function updateRoleId(roleId)
     {
-        document.getElementById('role_id').value = roleId;
+        document.getElementById('roleId').value = roleId;
     }
     
   </script>
