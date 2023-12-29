@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Melaka Go Web Application</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Nov 17 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <style>
+      .logo img {
+        border-radius: 50%; /* Set border-radius to 50% for a circular or oval shape */
+      }
+    </style>
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="indexBDSC.html" class="logo d-flex align-items-center">
+        <img src="assets/img/MelakaGo.png" alt="">
+        <span class="d-none d-lg-block">MelakaGo</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">Hi, User! </span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Hi, !!</h6>
+              <span>BUSINESS SPOT DATA COLLECTOR</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="userProfile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="indexBDSC.html">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="tourismservices.html">
+          <i class="bi bi-menu-button-wide"></i><span>Tourism Services</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="tourismservices.html">
+              <i class="bi bi-circle"></i><span>Tourism Service Management</span>
+            </a>
+          </li>
+          <li>
+            <a href="searchServices.html">
+              <i class="bi bi-circle"></i><span>Search Services</span>
+            </a>
+          </li>
+          <li>
+            <a href="tourismserviceadd.html">
+              <i class="bi bi-circle"></i><span>Add Services</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+    </ul>
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard Business Spot Data Collector</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="indexBDSC.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-16">
+          <div class="row">
+
+
+            <!-- HISTORICAL SITE CARD -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card historical-card">
+
+               
+                <div class="card-body">
+                  <h5 class="card-title">Tourism Service <span>| HISTORICAL SITE</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>0</h6>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End HISTORICAL SITE Card -->
+
+             <!-- LODGING -->
+             <div class="col-xxl-4 col-md-6">
+              <div class="card info-card lodging-card">
+
+               
+                <div class="card-body">
+                  <h5 class="card-title">Tourism Service <span>| LODGING</span></h5>
+
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-building-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>0</h6>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div><!-- End LODGING Card -->
+
+           <!-- ACTIVITIES -->
+           <div class="col-xxl-4 col-md-6">
+            <div class="card info-card activity-card">
+
+             
+              <div class="card-body">
+                <h5 class="card-title">Tourism Service <span>| ACTIVITIES</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-sunset-fill"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>0</h6>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End ACTIVITIES Card -->
+
+          <!-- TRANSPORT -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card transport-card">
+
+             
+              <div class="card-body">
+                <h5 class="card-title">Tourism Service <span>| TRANSPORT</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-taxi-front"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>0</h6>
+                  </div>
+                  
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End TRANSPORT Card -->
+
+          <!-- RESTAURANT -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card restaurant-card">
+
+             
+              <div class="card-body">
+                <h5 class="card-title">Tourism Service <span>| RESTAURANT</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-shop"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>0</h6>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End RESTAURANT Card -->
+
+          <!-- SHOPPING -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card shopping-card">
+
+             
+              <div class="card-body">
+                <h5 class="card-title">Tourism Service <span>| SHOPPING</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-cart"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>0</h6>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End SHOPPING Card -->
+
+         
+
+           
+            <!-- Reports -->
+            <div class="col-12">
+              <div class="card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Reports <span>/Today</span></h5>
+
+                  <!-- Line Chart -->
+                  <div id="reportsChart"></div>
+
+                  <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                      new ApexCharts(document.querySelector("#reportsChart"), {
+                        series: [{
+                          name: 'Sales',
+                          data: [31, 40, 28, 51, 42, 82, 56],
+                        }, {
+                          name: 'Revenue',
+                          data: [11, 32, 45, 32, 34, 52, 41]
+                        }, {
+                          name: 'Customers',
+                          data: [15, 11, 32, 18, 9, 24, 11]
+                        }],
+                        chart: {
+                          height: 350,
+                          type: 'area',
+                          toolbar: {
+                            show: false
+                          },
+                        },
+                        markers: {
+                          size: 4
+                        },
+                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
+                        fill: {
+                          type: "gradient",
+                          gradient: {
+                            shadeIntensity: 1,
+                            opacityFrom: 0.3,
+                            opacityTo: 0.4,
+                            stops: [0, 90, 100]
+                          }
+                        },
+                        dataLabels: {
+                          enabled: false
+                        },
+                        stroke: {
+                          curve: 'smooth',
+                          width: 2
+                        },
+                        xaxis: {
+                          type: 'datetime',
+                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
+                        },
+                        tooltip: {
+                          x: {
+                            format: 'dd/MM/yy HH:mm'
+                          },
+                        }
+                      }).render();
+                    });
+                  </script>
+                  <!-- End Line Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End Reports -->
+
+          </div>
+        </div><!-- End Left side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  
+  <script>
+  
+  
+    // Initialize variables outside the loop
+    var historicalSite=0, 
+    lodging=0,
+    activity=0,
+    transport=0, 
+    restaurant=0,
+    shopping=0;
+
+
+    document.addEventListener("DOMContentLoaded", function ()
+   {
+
+     console.log('DOMContentLoaded event fired.');
+
+     // Retrieve the JSON string from sessionStorage
+     var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+     console.log('User Profile: ', storedAppUserProfile);
+
+     // Update user nickname in the profile dropdown
+     var profileDropdownHeader = document.querySelector('.dropdown-menu .dropdown-header h6');
+     if (profileDropdownHeader) 
+     {
+        console.log('Updating user nickname.');
+        profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
+     } 
+     else 
+     {
+        console.log('Profile dropdown header not found.');
+     }
+
+     var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
+     if (profileDropdownLink) {
+       
+        var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
+
+        console.log('Updating user profile information.');
+
+        // Update profile name
+        if (profileNameSpan) 
+        {
+          profileNameSpan.textContent = storedAppUserProfile.nickName;
+        }
+            
+      } else {
+        console.log('Profile dropdown link not found.');
+      }
+
+      
+      // Array to store promises of AJAX calls
+      var ajaxPromises = [];
+
+      for (let i = 1; i < 7; i++) {
+        // Push each AJAX call promise into the array
+        ajaxPromises.push(new Promise(function (resolve, reject) {
+          // AJAX call
+          $.ajax({
+            type: "POST",
+            url: "melakago_php/countTourismService.php",
+            data: {
+              tsId: i,
+            },
+            success: function (response) {
+          
+              if (response.hasOwnProperty('count')) {
+                console.log('Response for tsId '+i+': ', response);
+                if (i == 1) {
+                  shopping = response.count;
+                  console.log('Shopping: ', shopping);
+                } else if (i == 2) {
+                  transport = response.count;
+                  console.log('transport: ', transport);
+                } else if (i == 3) {
+                  lodging = response.count;
+                  console.log('lodging: ', lodging);
+                } else if (i == 4) {
+                  restaurant = response.count;
+                  console.log('restaurant: ', restaurant);
+                } else if (i == 5) {
+                  activity = response.count;
+                  console.log('activity: ', activity);
+                } else if (i == 6) {
+                  historicalSite = response.count;
+                  console.log('Historical Site: ', historicalSite);
+                }
+
+                resolve();  // Resolve the promise when the AJAX call is successful
+              } else {
+                reject('Count not found in response.'); // Reject the promise if count is not found
+              }
+            },
+              error: function (jqXHR, textStatus, errorThrown) {
+              reject(errorThrown); // Reject the promise on AJAX error
+            }
+          });
+        }));
+      }
+
+
+       // When all promises are resolved, update the card values
+       Promise.all(ajaxPromises)
+        .then(function () {
+            // Select the <h6> element inside the ACTIVITIES card
+            var historicalCardH6 = document.querySelector('.historical-card h6');
+
+            // Check if the element is found before updating its content
+            if (historicalCardH6) {
+            // Update the content of the <h6> element with the new value
+              historicalCardH6.textContent = historicalSite;
+              } else {
+                console.error('ACTIVITIES card <h6> element not found.');
+              }
+
+            // Select the <h6> element inside the ACTIVITIES card
+            var lodgingCardH6 = document.querySelector('.lodging-card h6');
+
+              // Check if the element is found before updating its content
+              if (lodgingCardH6) {
+                // Update the content of the <h6> element with the new value
+                lodgingCardH6.textContent = lodging;
+              } else {
+                console.error('ACTIVITIES card <h6> element not found.');
+              }
+
+            // Select the <h6> element inside the ACTIVITIES card
+            var activitiesCardH6 = document.querySelector('.activity-card h6');
+
+              // Check if the element is found before updating its content
+              if (activitiesCardH6) {
+                // Update the content of the <h6> element with the new value
+                activitiesCardH6.textContent = activity;
+              } else {
+                console.error('ACTIVITIES card <h6> element not found.');
+              }
+
+            // Select the <h6> element inside the ACTIVITIES card
+            var transportCardH6 = document.querySelector('.transport-card h6');
+
+              // Check if the element is found before updating its content
+              if (transportCardH6) {
+                // Update the content of the <h6> element with the new value
+                transportCardH6.textContent = transport;
+              } else {
+                console.error('ACTIVITIES card <h6> element not found.');
+              }
+
+            // Select the <h6> element inside the ACTIVITIES card
+            var restaurantCardH6 = document.querySelector('.restaurant-card h6');
+
+              // Check if the element is found before updating its content
+              if (restaurantCardH6) {
+                // Update the content of the <h6> element with the new value
+                restaurantCardH6.textContent = restaurant;
+              } else {
+                console.error('ACTIVITIES card <h6> element not found.');
+              }
+
+            // Select the <h6> element inside the ACTIVITIES card
+            var shoppingCardH6 = document.querySelector('.shopping-card h6');
+
+              // Check if the element is found before updating its content
+              if (shoppingCardH6) {
+                // Update the content of the <h6> element with the new value
+                shoppingCardH6.textContent = shopping;
+              } else {
+                console.error('ACTIVITIES card <h6> element not found.');
+              } 
+          })
+            .catch(function (error) {
+            console.error('Error during AJAX calls:', error);
+          });
+   });
+   
+   
+
+  </script>
+
+
+  
+</body>
+
+</html>
