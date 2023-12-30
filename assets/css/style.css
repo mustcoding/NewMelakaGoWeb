@@ -151,6 +151,17 @@ h6 {
   background-color: #f6f9ff;
 }
 
+.grid-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adjust the gap between buttons */
+}
+
+.btn-action {
+  width: 100%;
+  text-align: center;
+}
+
 @media (min-width: 768px) {
   .dropdown-menu-arrow::before {
     content: "";
@@ -1271,3 +1282,4 @@ h6 {
   font-size: 13px;
   color: #012970;
 }
+
