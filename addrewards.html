@@ -1,7 +1,52 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+
+  <script>
+    function saveReward() {
+      // Get form data
+      var rewardName = document.getElementById('validationCustom01').value;
+      var rewardPoint = document.getElementById('validationDefault04').value;
+      var rewardCode = document.getElementById('validationDefault02').value;
+      var tnc = document.getElementById('validationCustom02').value;
+
+      // Validate form data (you can use additional validation if needed)
+
+      // Send data to the server using AJAX
+      $.ajax({
+        type: 'POST',
+        url: 'melakago_php/addreward.php',
+        contentType: 'application/json',  // Add this line
+        data: JSON.stringify({
+  		rewardName: rewardName,
+  		rewardPoint: rewardPoint,
+  		rewardCode: rewardCode,
+  		tnc: tnc
+        }),
+        success: function (response) {
+          // Handle the server response (e.g., show success message)
+          console.log(response);
+          alert('Reward saved successfully!');
+        },
+        error: function (error) {
+          // Handle errors
+          console.error('Error saving reward', error);
+          alert('Error saving reward. Please try again.');
+        }
+      });
+    }
+
+    function returnToIndex() {
+      // Redirect to the index page or perform any other action
+    }
+  </script>
+
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -60,6 +105,147 @@
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a><!-- End Notification Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              You have 4 new notifications
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                <h4>Lorem Ipsum</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>30 min. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-x-circle text-danger"></i>
+              <div>
+                <h4>Atque rerum nesciunt</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>1 hr. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-check-circle text-success"></i>
+              <div>
+                <h4>Sit rerum fuga</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>2 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-info-circle text-primary"></i>
+              <div>
+                <h4>Dicta reprehenderit</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>4 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+              <a href="#">Show all notifications</a>
+            </li>
+
+          </ul><!-- End Notification Dropdown Items -->
+
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">3</span>
+          </a><!-- End Messages Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              You have 3 new messages
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Maria Hudson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>4 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Anna Nelson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>6 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>David Muldon</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>8 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="dropdown-footer">
+              <a href="#">Show all messages</a>
+            </li>
+
+          </ul><!-- End Messages Dropdown Items -->
+
+        </li><!-- End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
 
@@ -154,7 +340,7 @@
                   <h5 class="card-title">Reward Details</h5>
     
                   <!-- Custom Styled Validation -->
-                  <form class="row g-3 needs-validation" novalidate>
+                  <form id="rewardForm" class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
                       <label for="validationCustom01" class="form-label">Reward Name</label>
                       <input type="text" class="form-control" id="validationCustom01" required>
@@ -235,10 +421,8 @@
                     </div>
                     
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-secondary" onclick="returnToIndex()">
-                          Cancel
-                        </button>
+    			<button type="button" class="btn btn-primary" onclick="saveReward()">Save</button>
+    			<button type="button" class="btn btn-secondary" onclick="returnToIndex()">Cancel</button>
                       </div>
                   </form><!-- End Custom Styled Validation -->
     
@@ -276,50 +460,6 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-  <script>
-
-     // Retrieve the JSON string from sessionStorage
-     var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
-      console.log('User Profile: ', storedAppUserProfile);
-
-      // Update user nickname in the profile dropdown
-      var profileDropdownHeader = document.querySelector('.dropdown-menu .dropdown-header h6');
-      if (profileDropdownHeader) 
-      {
-        console.log('Updating user nickname.');
-        profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
-
-      } 
-      else 
-      {
-        console.log('Profile dropdown header not found.');
-      }
-
-      var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
-      if (profileDropdownLink) {
-        
-        var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
-
-        console.log('Updating user profile information.');
-
-        // Update profile name
-        if (profileNameSpan) 
-        {
-          profileNameSpan.textContent = storedAppUserProfile.nickName;
-        }
-            
-      } else {
-        console.log('Profile dropdown link not found.');
-      }
-
-    function returnToIndex(){
-      window.open('rewards.html','_self');
-    }
-  </script>
 
 </body>
 

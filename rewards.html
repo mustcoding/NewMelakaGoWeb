@@ -60,6 +60,149 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
+
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a><!-- End Notification Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              You have 4 new notifications
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                <h4>Lorem Ipsum</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>30 min. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-x-circle text-danger"></i>
+              <div>
+                <h4>Atque rerum nesciunt</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>1 hr. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-check-circle text-success"></i>
+              <div>
+                <h4>Sit rerum fuga</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>2 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-info-circle text-primary"></i>
+              <div>
+                <h4>Dicta reprehenderit</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>4 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+              <a href="#">Show all notifications</a>
+            </li>
+
+          </ul><!-- End Notification Dropdown Items -->
+
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">3</span>
+          </a><!-- End Messages Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              You have 3 new messages
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Maria Hudson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>4 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Anna Nelson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>6 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>David Muldon</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>8 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="dropdown-footer">
+              <a href="#">Show all messages</a>
+            </li>
+
+          </ul><!-- End Messages Dropdown Items -->
+
+        </li><!-- End Messages Nav -->
+
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -146,16 +289,6 @@
       <h1>Rewards Management</h1>
     </div><!-- End Page Title -->
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      The question is successfully saved.
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      Houston... we got problem.
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
@@ -165,11 +298,6 @@
               <h5 class="card-title">
                 List of Rewards
               </h5>
-
-               <button type="button" class="btn btn-primary"
-                onClick = "displayAddRewardPage()">
-                  Add Reward
-               </button>
 
               <!-- Default Table -->
               <table class="table">
@@ -185,19 +313,11 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td>Parking Ticket</td>
-                    <td>100</td>
-                    <td>FP200</td>
-                    <td>At Least Having 200 point</td>
-                    <td>
-                      <button type="button" class="btn btn-primary">Edit</button>
-                      <button type="button" class="btn btn-warning">Archive</button>
-                      <button type="button" class="btn btn-danger">Delete</button>
+
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </table> 
               <!-- End Default Table Example -->
             </div>
           </div>
@@ -239,44 +359,61 @@
 
   <script>
 
-     // Retrieve the JSON string from sessionStorage
-     var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
-      console.log('User Profile: ', storedAppUserProfile);
-
-      // Update user nickname in the profile dropdown
-      var profileDropdownHeader = document.querySelector('.dropdown-header h6');
-      if (profileDropdownHeader) 
-      {
-        console.log('Updating user nickname.');
-        profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
-
-      } 
-      else 
-      {
-        console.log('Profile dropdown header not found.');
-      }
-
-      var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
-      if (profileDropdownLink) {
-        
-        var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
-
-        console.log('Updating user profile information.');
-
-        // Update profile name
-        if (profileNameSpan) 
-        {
-          profileNameSpan.textContent = storedAppUserProfile.nickName;
-        }
-            
-      } else {
-        console.log('Profile dropdown link not found.');
-      }
-
     function displayAddRewardPage(){
       window.open('addrewards.html','_self');
     }
   </script>
+
+<!-- Add this script section at the end of your HTML body -->
+<script>
+  // Function to fetch rewards from the server
+  function fetchRewards() {
+    // Make an asynchronous GET request to the PHP script
+  fetch('melakago_php/listReward.php')
+      .then(response => response.json())
+      .then(data => {
+        // Check if the response contains rewards
+        if (data.rewards) {
+          // Get the table body element
+          var tableBody = document.querySelector('table tbody');
+
+          // Clear existing rows
+          tableBody.innerHTML = '';
+
+          // Iterate over each reward and create a table row
+          data.rewards.forEach((reward, index) => {
+            var row = `<tr>
+                          <td>${index + 1}</td>
+                          <td>${reward.rewardName}</td>
+                          <td>${reward.rewardPoint}</td>
+                          <td>${reward.rewardCode}</td>
+                          <td>${reward.tnc}</td>
+                          <td>
+                            <button type="button" class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-warning">Archive</button>
+                            <button type="button" class="btn btn-danger">Delete</button>
+                          </td>
+                       </tr>`;
+            // Append the row to the table body
+            tableBody.innerHTML += row;
+          });
+        } else {
+          // Handle the case when no rewards are found
+          console.log('No rewards found');
+        }
+      })
+      .catch(error => {
+        // Handle errors during the fetch
+        console.error('Error fetching rewards:', error);
+      });
+  }
+
+  // Call the fetchRewards function when the page loads
+  window.onload = function() {
+    fetchRewards();
+  };
+</script>
+
 
 </body>
 
