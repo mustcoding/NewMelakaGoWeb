@@ -473,6 +473,48 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <script>
+
+    console.log('DOMContentLoaded event fired.');
+
+    // Retrieve the JSON string from sessionStorage
+    var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+    console.log('User Profile: ', storedAppUserProfile);
+
+    // Update user nickname in the profile dropdown
+    var profileDropdownHeader = document.querySelector('.dropdown-menu .dropdown-header h6');
+    if (profileDropdownHeader) 
+    {
+      console.log('Updating user nickname.');
+      profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
+
+    } 
+    else 
+    {
+      console.log('Profile dropdown header not found.');
+    }
+
+    var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
+    if (profileDropdownLink) {
+      
+      var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
+
+      console.log('Updating user profile information.');
+
+      // Update profile name
+      if (profileNameSpan) 
+      {
+        profileNameSpan.textContent = storedAppUserProfile.nickName;
+      }
+          
+    } else {
+      console.log('Profile dropdown link not found.');
+    }
+
+
+
+  </script>
+
 </body>
 
 </html>

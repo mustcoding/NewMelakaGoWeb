@@ -49,6 +49,20 @@
       }
     </style>
 
+    <style>
+      .button-column {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Adjust the gap between buttons */
+      }
+
+      .btn-action {
+        width: 80% !important; /* Use !important to ensure that this style takes precedence */
+        text-align: center;
+      }
+    </style>
+
+
     <div class="d-flex align-items-center justify-content-between">
       <a href="indexTAC.html" class="logo d-flex align-items-center">
         <img src="assets/img/MelakaGo.png" alt="">
@@ -121,13 +135,8 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="questions.html">
-              <i class="bi bi-circle"></i><span>Quiz Question Management</span>
-            </a>
-          </li>
-          <li>
             <a href="searchQuestion.html">
-              <i class="bi bi-circle"></i><span>Search Question</span>
+              <i class="bi bi-circle"></i><span>Quiz Question Management</span>
             </a>
           </li>
           <li>
@@ -158,21 +167,22 @@
     </div>
 
     <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Search Question</h5>
-    
-            <!-- Horizontal Form -->
-            <form class="row g-3 align-items-center">
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control me-2" id="inputName4">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
+      <div class="card-body">
+          <h5 class="card-title">Search Question</h5>
+  
+          <form class="row g-3 align-items-center">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" class="form-control me-2" id="questionQuiz" placeholder="Enter Question Text">
+                    <button type="button" class="btn btn-primary" onclick="searchServices()">
+                        Search
+                    </button>
                 </div>
-            </form><!-- Horizontal Form -->
-    
-        </div>
-    </div>
+            </div>
+        </form><!-- Horizontal Form -->
+  
+      </div>
+  </div>
 
 
     <!-- MAIN BODY OF QUESTION -->
@@ -194,34 +204,20 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col" style="width: 150px;">Tourism Spot</th>
-                    <th scope="col" style="width: 150px;">QR Spot</th>
-                    <th scope="col" style="width: 550px;">Question Text</th>
+                    <th scope="col" style="width: 1000px;">Question Text</th>
                     <th scope="col" style="width: 550px;">Answer 1 </th>
                     <th scope="col" style="width: 550px;">Answer 2 </th>
                     <th scope="col" style="width: 550px;">Answer 3 </th>
                     <th scope="col" style="width: 550px;">Answer 4 </th>
                     <th scope="col" style="width: 550px;">Correct Answer </th>
                     <th scope="col" style="width: 150px;">Points </th>
-                    <th scope="col" style="width: 2550px;">Action </th>
+                    <th scope="col" style="width: 350px;">Action </th>
                     
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>St Paul Hill</td>
-                    <td>1</td>
-                    <td>When was the St Paul Hill established? </td>
-                    <td>1959</td>
-                    <td>1990</td>
-                    <td>1962</td>
-                    <td>1991 </td>
-                    <td>1991 </td>
-                    <td>100</td>
-                    <td>
-                      <button type="button" class="btn btn-primary">Edit</button>
-                      <button type="button" class="btn btn-warning">Archive</button>
-                      <button type="button" class="btn btn-danger">Delete</button>
+                   
                     </td>
                   </tr>
                 </tbody>
@@ -301,9 +297,122 @@
         console.log('Profile dropdown link not found.');
       }
 
+
+     // Function to fetch data from the server
+    function fetchData() {
+      fetch('melakago_php/loadQuizQuestion.php')
+        .then(response => response.json())
+        .then(data => {
+          // Call a function to update the table with the fetched data
+          updateTable(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    
+
+    // Function to update the table with data
+    function updateTable(data) {
+      const tbody = document.querySelector('table tbody');
+
+      // Clear existing rows
+      tbody.innerHTML = '';
+
+      
+      // Iterate over the data and create rows
+      data.forEach((item, index) => 
+      {
+        
+        const row = `<tr>
+                      <td>${index + 1}</td>
+                      <td>${item.companyName}</td>
+                      <td>${item.questionText}</td>
+                      <td>${item.answerOption1}</td>
+                      <td>${item.answerOption2}</td>
+                      <td>${item.answerOption3}</td>
+                      <td>${item.answerOption4}</td>
+                      <td>${item.correctAnswer}</td>
+                      <td>${item.point}</td>
+                      <td>
+                        <div class="button-column">
+                          <button type="button" class="btn btn-primary" onclick="editQuestion(${item.questionId})">Edit</button>
+                          <button type="button" class="btn btn-danger" onclick="deleteQuestion(${item.questionId})">Delete </button>
+                        </div>
+                      </td>
+                    </tr>`;
+
+        // Append the row to the tbody
+        tbody.innerHTML += row;
+      });
+    }
+
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fetch data when the page loads
+      fetchData();
+    });
+
+
+    function searchServices() {
+    // Get the search term
+    var searchTerm = document.getElementById('questionQuiz').value.toLowerCase();
+    console.log('KEYWORD:',searchTerm);
+
+    // Get all rows in the table
+    var rows = document.querySelectorAll('table tbody tr');
+
+    // Loop through each row and hide/show based on the search term
+    rows.forEach(function (row) {
+        // Update the selector to target the correct cell (company name)
+        var companyName = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+        // Convert both the company name and the search term to lowercase for comparison
+        if (companyName.includes(searchTerm)) {
+            row.style.display = 'table-row';
+        } else {
+            row.style.display = 'none';
+        }
+    });
+   } 
+
     function displayAddQuestionPage(){
       window.open('addquestion.html','_self');
     }
+
+    function editQuestion(questionId){
+      window.open(`editQuestions.html?questionId=${questionId}`,'_self');
+    }
+
+    function deleteQuestion(questionId)
+    {
+       // Create an object to hold the data you want to send
+       const data = {
+            questionId : questionId,
+        };
+
+        fetch('melakago_php/quizquestion.php', {
+            method: 'PUT', // Use the POST method
+            headers: {
+            'Content-Type': 'application/json' // Set the content type to JSON
+            },
+            body: JSON.stringify(data) // Convert the data object to a JSON string
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response from the server
+            console.log("Question Successfully deleted ", data);
+            window.location.href = "searchQuestion.html";
+            
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+        
+    }
+
+
   </script>
 
 </body>

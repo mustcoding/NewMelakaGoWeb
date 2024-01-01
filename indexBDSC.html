@@ -121,13 +121,8 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tourismservices.html">
-              <i class="bi bi-circle"></i><span>Tourism Service Management</span>
-            </a>
-          </li>
-          <li>
             <a href="searchServices.html">
-              <i class="bi bi-circle"></i><span>Search Services</span>
+              <i class="bi bi-circle"></i><span>Tourism Service Management</span>
             </a>
           </li>
           <li>
@@ -462,7 +457,7 @@
         console.log('Profile dropdown link not found.');
       }
 
-      
+      console.log("Date Of Birth: ", storedAppUserProfile.dateOfBirth);
       // Array to store promises of AJAX calls
       var ajaxPromises = [];
 
@@ -581,6 +576,7 @@
               } else {
                 console.error('ACTIVITIES card <h6> element not found.');
               } 
+
           })
             .catch(function (error) {
             console.error('Error during AJAX calls:', error);

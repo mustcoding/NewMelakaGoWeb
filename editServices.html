@@ -48,6 +48,14 @@
         border-radius: 50%; /* Set border-radius to 50% for a circular or oval shape */
       }
     </style>
+     <style>
+        .image-spacing {
+            margin-right: 20px; /* Adjust the value to set the desired spacing */
+            width: 300px;
+            height: 200px;
+            margin-top: 20px;
+        }
+    </style>
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="indexBDSC.html" class="logo d-flex align-items-center">
@@ -137,34 +145,23 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Add New Tourism Service</h1>
+      <h1>Edit Tourism Service</h1>
     </div><!-- End Page Title -->
 
 
+    
     <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Upload Multiple Pictures</h5>
-        <form class="row g-3 align-items-center" enctype="multipart/form-data">
-          <div id="imageContainer" class="mt-3">
-              <!-- Display selected images here -->
-          </div>
-          <div class="col-md-6">
-            <label for="validationDefault04" class="form-label">Select Pictures</label>
-            <div class="input-group">
-              <input type="file" class="form-control" id="pictureFiles" name="pictureFiles[]" multiple onchange="displaySelectedImages(this.files)">
-              <button type="button" class="btn btn-primary" onclick="uploadPictures()">Upload</button>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-              <div class="invalid-feedback">
-                Please select at least one picture.
-              </div>
-            </div>
-          </div>
-        </form><!-- Horizontal Form -->
-      </div>
-    </div>
+        <div class="card-body">
+          <h5 class="card-title">Tourism Service Images</h5>
 
+            <div id="imageContainer" class="mt-3">
+                <!-- Display selected images here -->
+            </div>
+           
+          </form><!-- Horizontal Form -->
+        </div>
+      </div>
+    
 
     <section class="section">
         
@@ -172,30 +169,10 @@
 
           <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Quiz Question Details</h5>
+                <h5 class="card-title">Tourism Service Details</h5>
   
                 <!-- Custom Styled Validation -->
                 <form class="row g-3 needs-validation" novalidate>
-                  <div class="col-12">
-                    <label for="tourismServices" class="form-label">Type of Service</label>
-
-                    <select class="form-select" id="ts_Id" required onchange="updateRoleId(this.value)">
-                      <option selected disabled value="">Select Tourism Service Category</option>
-                      <option value="1">Shopping</option>
-                      <option value="2">Transport</option>
-                      <option value="3">Lodging</option>
-                      <option value="4">Restaurant</option>
-                      <option value="5">Activity</option>
-                      <option value="6">Historical Site</option>
-                    </select>
-                    <input type="hidden" name="tsId" id="tsId" value="1">
-                    <div class="valid-feedback">
-                        Looks good!
-                      </div>
-                    <div class="invalid-feedback">
-                        Please select type of services!
-                      </div>
-                  </div>
 
                   <div class="col-12">
                     <label for="validationCustom02" class="form-label">Company Name</label>
@@ -373,9 +350,8 @@
                   </div>
                   
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary" onclick="addTourismService(
+                    <button type="submit" class="btn btn-primary" onclick="editTourismService(
                       event,
-                      document.getElementById('tsId').value,
                       document.getElementById('companyName').value,
                       document.getElementById('address1').value, 
                       document.getElementById('address2').value,
@@ -474,7 +450,7 @@
     }
 
     function returnToIndex(){
-      window.open('tourismservices.html','_self');
+      window.open('searchServices.html','_self');
     }
   </script>
 
@@ -487,50 +463,17 @@
   </script>
 
   <script>
-    function uploadPictures() {
-      // Get the input element that holds the selected files
-      var inputElement = document.getElementById('pictureFiles');
-      
-      // Get the selected files
-      var files = inputElement.files;
-
-      // Check if files are selected
-      if (files.length > 0) {
-        // Iterate through each selected file
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          
-          // Create a new FileReader
-          var reader = new FileReader();
-
-          // Define the onload event handler
-          reader.onload = function (e) {
-            // e.target.result contains the base64-encoded string
-            var base64String = e.target.result;
-
-            // Do something with the base64String, such as sending it to the server
-            console.log('Base64-encoded image:', base64String);
-
-          };
-
-          // Read the file as Data URL (base64 encoding)
-          reader.readAsDataURL(file);
-        }
-      } else {
-        // No files selected
-        console.error('Please select at least one picture.');
-      }
-    }
-  </script>
-
-  <script>
-
-    function addTourismService(event, tsId, companyName, address1,
+    function editTourismService(event, companyName, address1,
     address2, area, postcode, businessContactNumber, email,businessStartHour, businessEndHour, starRating,
     faxNumber, instagramURL, xTwitterURL, threadURL, facebookURL, businessLocation, businessDescription)
    {
 
       event.preventDefault();
+
+      // Get the questionId from the URL
+      const queryString = window.location.search;
+       const urlParams = new URLSearchParams(queryString);
+       const tourismServiceId = urlParams.get('tourismServiceId');
 
       if(email==null){
         email="";
@@ -562,6 +505,7 @@
 
       // Create an object to hold the data you want to send
       const data = {
+        tourismServiceId:tourismServiceId,
         companyName: companyName,
         companyAddress: companyAddress,
         businessContactNumber: businessContactNumber,
@@ -576,10 +520,9 @@
         businessLocation: businessLocation,
         starRating: starRating,
         businessDescription: businessDescription,
-        tsId: tsId,
       };
 
-      console.log("Here : ",tsId);
+      console.log("Here : ",tourismServiceId);
       console.log("Here : ",companyName);
       console.log("Here : ",companyAddress);
       console.log("Here : ",businessContactNumber);
@@ -599,7 +542,7 @@
       Object.keys(data).forEach(key => data[key] == null && delete data[key]);
 
       fetch('melakago_php/tourismService.php', {
-        method: 'POST', // Use the POST method
+        method: 'PUT', // Use the POST method
         headers: {
           'Content-Type': 'application/json' // Set the content type to JSON
         },
@@ -608,10 +551,8 @@
         .then(response => response.json())
         .then(data => {
           // Handle the response from the server
-          console.log("Tourism Service Successfully being registered ", data);
-          console.log("TOURISM SERVICE ID : ", data.tourismServiceId);
-          saveImages(data.tourismServiceId);
-
+          console.log("Tourism Service Successfully being updated ", data);
+          window.location.href='searchServices.html';
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -620,120 +561,219 @@
     }
   </script>
 
-  <script>
-    function saveImages(tourismServiceId) {
-      // Get the input element that holds the selected files
-      var inputElement = document.getElementById('pictureFiles');
-      var tourismServiceId = tourismServiceId;
-      
-      // Get the selected files
-      var files = inputElement.files;
 
-      // Check if files are selected
-      if (files.length > 0) {
+    <script>
        
-        // Create an array to store base64-encoded images
-        var base64Images = [];
+      // Function to update images in the #imageContainer
+        function updateImages(imageData) {
+            const imageContainer = document.getElementById('imageContainer');
 
-        // Iterate through each selected file
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
+            // Clear existing images in the container
+            imageContainer.innerHTML = '';
 
-          // Create a new FileReader
-          var reader = new FileReader();
+            // Check if there are images to display
+            if (imageData && imageData.length > 0) {
+                // Loop through each image data and create image elements
+                imageData.forEach(imageInfo => {
+                    // Create an image element
+                    const imageElement = document.createElement('img');
 
-          // Define the onload event handler
-          reader.onload = function (e) {
-            // e.target.result contains the base64-encoded string
-            var base64String = e.target.result;
+                    // Function to check if the input is a base64-encoded string
+                    const isBase64 = str => {
+                        try {
+                            return btoa(atob(str)) == str;
+                        } catch (err) {
+                            return false;
+                        }
+                    };
 
-            // Add the base64-encoded image to the array
-            base64Images.push(base64String);
+                    // Check if the image data starts with the prefix
+                    if (imageInfo.image.startsWith("data:image/jpeg;base64,")) {
+                        // If it starts with the prefix, set the src attribute
+                        imageElement.src = imageInfo.image;
 
-            // If all images are processed, send the array to the server
-            if (base64Images.length === files.length) {
-              sendImagesToServer(tourismServiceId, base64Images);
+                        // Optional: Add a Bootstrap class for responsive images
+                        imageElement.classList.add('img-fluid');
+
+                        // Add a custom class for spacing between images
+                        imageElement.classList.add('image-spacing');
+                                                
+                    } else {
+                        const imageContainer = document.getElementById('imageContainer');
+
+                        // Clear existing images in the container
+                        imageContainer.innerHTML = '';
+
+                        // Check if there are images to display
+                        if (imageData && imageData.length > 0) {
+                            // Loop through each image data and create image elements
+                            imageData.forEach(imageInfo => {
+                                const imageUrl = encodeURIComponent(imageInfo.image); // Assuming the property name is "image"
+                                // You can add more properties such as alt text, etc., if needed
+
+                                // Create an image element
+                                const imageElement = document.createElement('img');
+
+                                // Set the source of the image to the base64-encoded string
+                                imageElement.src = 'data:image/png;base64,' + imageUrl;
+
+                                // Optional: Add a Bootstrap class for responsive images
+                                imageElement.classList.add('img-fluid');
+
+                                  // Add a custom class for spacing between images
+                                imageElement.classList.add('image-spacing');
+
+                                // Append the image to the container
+                                imageContainer.appendChild(imageElement);
+                            });
+                        }
+                    }
+
+                    // Optional: Add a Bootstrap class for responsive images
+                    imageElement.classList.add('img-fluid');
+
+                    // Append the image to the container
+                    imageContainer.appendChild(imageElement);
+                });
             }
-          };
-
-          // Read the file as Data URL (base64 encoding)
-          reader.readAsDataURL(file);
         }
-      } else {
-        // No files selected
-        console.error('Please select at least one picture.');
-      }
-    }
 
-    function sendImagesToServer(tourismServiceId, base64Images) {
-      // Create an object to hold the data you want to send
-      const data = {
-        image: base64Images,
-        tourismServiceId: tourismServiceId,
-      };
+        // Function to fetch data from the server
+        function fetchData(tourismServiceId) {
+            const data = {
+                tourismServiceId: tourismServiceId
+            };
 
-      fetch('melakago_php/tourismServiceImage.php', {
-        method: 'POST', // Use the POST method
-        headers: {
-          'Content-Type': 'application/json', // Set the content type to JSON
-        },
-        body: JSON.stringify(data), // Convert the data object to a JSON string
-      })
-        .then(response => response.json())
-        .then(data => {
-          // Handle the response from the server
-          console.log('Images successfully saved:', data);
-          window.location.href = "searchServices.html";
-          
-        })
-        .catch(error => {
-          console.error('Error saving images:', error);
+            fetch('melakago_php/tourismServiceImage.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Successfully Retrieving Data", data);
+                updateImages(data.images);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        }
+
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the tourismServiceId from the URL
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const tourismServiceId = urlParams.get('tourismServiceId');
+
+            // Now you have the tourismServiceId, and you can use it as needed
+            console.log('Tourism Service ID:', tourismServiceId);
+
+            // Fetch data when the page loads
+            fetchData(tourismServiceId);
         });
-    }
-  </script>
+    </script>
 
-<script>
-  function displaySelectedImages(files) {
-    // Get the container element
-    var imageContainer = document.getElementById('imageContainer');
-  
-    // Clear previous content
-    imageContainer.innerHTML = '';
-  
-    // Iterate through each selected file
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-  
-      // Create a new FileReader
-      var reader = new FileReader();
-  
-      // Define the onload event handler
-      reader.onload = function (e) {
-        // e.target.result contains the base64-encoded string
-        var base64String = e.target.result;
-  
-        // Create an image element
-        var img = document.createElement('img');
-        img.src = base64String;
-        img.alt = 'Selected Image';
-  
-        // Set styles if needed
-        img.style.width = '300px';
-        img.style.height = '200px';
-        img.style.marginRight = '20px'; // Add margin-right for spacing
-        img.style.marginTop = '20px';
-  
-        // Append the image to the container
-        imageContainer.appendChild(img);
-      };
-  
-      // Read the file as Data URL (base64 encoding)
-      reader.readAsDataURL(file);
-    }
-  }
-  </script>
+    <script>
+        function fetchDetails(tourismServiceId)
+        {
+            const data = 
+            {
+                tourismServiceId: tourismServiceId
+            };
 
-  
+            fetch('melakago_php/tourismService.php',
+            {
+                method: 'POST', // Use the POST method
+                headers: 
+                {
+                'Content-Type': 'application/json' // Set the content type to JSON
+                },
+                body: JSON.stringify(data) // Convert the data object to a JSON string
+            })
+            .then(response => response.json())
+            .then(data => 
+            {
+
+                console.log("Successfully Retrieving Data", data);
+                console.log("Question Text: ", data.questionText);
+                updateDetails(data);
+
+            })
+            .catch(error => {
+            console.error('Error fetching data:', error);
+            });
+        }
+
+        function updateDetails(data)
+        {
+
+            const Address = data.companyAddress;
+            const address = Address.split(',').map(component => component.trim());
+
+            const address1 = address[0] || '';
+            const address2 = address[1] || '';
+            const postcode = address[2] || '';
+
+            // Combine the remaining components as the area
+            const area = address.slice(3).join(', ') + (address.length > 3 ? '' : '') || '';
+
+
+            // Access the input fields
+            const companyNameInput = document.getElementById('companyName');
+            const address1Input = document.getElementById('address1');
+            const address2Input = document.getElementById('address2');                
+            const postcodeInput = document.getElementById('postcode');
+            const areaInput = document.getElementById('area');
+            const phoneNumberInput = document.getElementById('businessContactNumber');
+            const emailInput = document.getElementById('email');
+            const BSHInput = document.getElementById('businessStartHour');
+            const BEHInput = document.getElementById('businessEndHour');
+            const faxNumberInput = document.getElementById('faxNumber');
+            const instagramInput = document.getElementById('instagramURL');                
+            const threadInput = document.getElementById('threadURL');
+            const facebookInput = document.getElementById('facebookURL');
+            const businessLocInput = document.getElementById('businessLocation');
+            const businessDescInput = document.getElementById('businessDescription');
+            const xTwitterInput = document.getElementById('xTwitterURL');
+
+            // Set the values of the input fields
+            companyNameInput.value = data.companyName;
+            address1Input.value = address1+',';                
+            address2Input.value = address2+',';
+            postcodeInput.value = postcode+',';
+            areaInput.value = area;
+            phoneNumberInput.value = data.businessContactNumber;
+            emailInput.value = data.email;
+            BSHInput.value = data.businessStartHour;
+            BEHInput.value = data.businessEndHour;                
+            faxNumberInput.value = data.faxNumber;
+            instagramInput.value = data.instagramURL;
+            threadInput.value = data.threadURL;
+            facebookInput.value = data.facebookURL;
+            businessLocInput.value = data.businessLocation;
+            businessDescInput.value = data.businessDescription;
+            xTwitterInput.value = data.xTwitterURL;
+        // Other code for updating the table can remain the same...
+        }
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () 
+        {
+
+            // Get the questionId from the URL
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const tourismServiceId = urlParams.get('tourismServiceId');
+
+            // Now you have the questionId, and you can use it as needed
+            console.log('Tourism Service ID:', tourismServiceId);
+            // Fetch data when the page loads
+            fetchDetails(tourismServiceId);
+        });
+
+    </script>
 
 </body>
 

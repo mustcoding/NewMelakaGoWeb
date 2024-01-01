@@ -16,11 +16,12 @@ $db = new PDO ("mysql:host=$hostname;dbname=$database",$username,$password);
 http_response_code(404);
 $response = new stdClass();
 
-{
-	$jsonbody = json_decode(file_get_contents('php://input'));
-}
+
+$jsonbody = json_decode(file_get_contents('php://input'));
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     try {
         if (isset($jsonbody->companyName) &&
 			isset($jsonbody->companyAddress) &&
@@ -47,38 +48,83 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				`businessStartHour`,`businessEndHour`,`faxNumber`,`instagramURL`,`xTwitterURL`,
 				`threadURL`,`facebookURL`,`businessLocation`,`starRating`,`businessDescription`,`tsId`, `isDelete`) 
                     VALUES (:companyName, :companyAddress, :businessContactNumber, :email, :businessStartHour, 
-					:businessEndHour, :faxNumber, :instagram,
-					:xTwitter, :thread, :facebook, :businessLocation, :starRating, :businessDescription, :tsId, :isDelete)");
+					:businessEndHour, :faxNumber, :instagramURL,
+					:xTwitterURL, :threadURL, :facebookURL, :businessLocation, :starRating, :businessDescription, :tsId, 0)");
 
-                $stmt->execute([
-                    ':companyName' => $jsonbody->companyName,
-                    ':companyAddress' => $jsonbody->companyAddress,
-                    ':businessContactNumber' => $jsonbody->businessContactNumber,
-                    ':email' => $jsonbody->email,
-                    ':businessStartHour' => $jsonbody->businessStartHour,
-                    ':businessEndHour' => $jsonbody->businessEndHour,
-                    ':faxNumber' => $jsonbody->faxNumber,
-                    ':instagram' => $jsonbody->instagram,
-                    ':xTwitter' => $jsonbody->xTwitter,
-					':thread' => $jsonbody->thread,
-					':facebook' => $jsonbody->facebook,
+				$stmt->execute([
+					':companyName' => $jsonbody->companyName,
+					':companyAddress' => $jsonbody->companyAddress,
+					':businessContactNumber' => $jsonbody->businessContactNumber,
+					':email' => $jsonbody->email,
+					':businessStartHour' => $jsonbody->businessStartHour,
+					':businessEndHour' => $jsonbody->businessEndHour,
+					':faxNumber' => $jsonbody->faxNumber,
+					':instagramURL' => $jsonbody->instagramURL,
+					':xTwitterURL' => $jsonbody->xTwitterURL,
+					':threadURL' => $jsonbody->threadURL,
+					':facebookURL' => $jsonbody->facebookURL,
 					':businessLocation' => $jsonbody->businessLocation,
 					':starRating' => $jsonbody->starRating,
 					':businessDescription' => $jsonbody->businessDescription,
-                    ':tsId' => $jsonbody->tsId,
-					':isDelete' => $jsonbody->isDelete
-                ]);
+					':tsId' => $jsonbody->tsId
+				]);
 
-                http_response_code(200);
+                // Get the last inserted id (qrId)
+				$lastInsertId = $db->lastInsertId();
+    
+				http_response_code(200);
+				$response->tourismServiceId = $lastInsertId;
 				$response->error = "Successfully registered";
             }
-        } else {
+        }
+		else if(isset($jsonbody->tourismServiceId)){
+			$jsonbody = json_decode(file_get_contents('php://input'));
+
+			
+		    $tourismServiceId = $jsonbody->tourismServiceId;
+	
+			$stmt = $db->prepare("SELECT * FROM tourismservice WHERE tourismServiceId=:tourismServiceId and isDelete=0");
+			$stmt->bindParam(':tourismServiceId', $tourismServiceId);
+	
+			$stmt->execute();
+	
+			if ($stmt->rowCount() > 0) {
+				$userData = $stmt->fetch(PDO::FETCH_ASSOC);
+                http_response_code(200);
+				$response = [
+					'tourismServiceId' => $userData['tourismServiceId'],
+					'companyName' => $userData['companyName'],
+					'companyAddress' => $userData['companyAddress'],
+					'businessContactNumber' => $userData['businessContactNumber'],
+					'email' => $userData['email'],
+					'businessStartHour' => $userData['businessStartHour'],
+					'businessEndHour' => $userData['businessEndHour'],
+					'faxNumber' => $userData['faxNumber'],
+					'instagramURL' => $userData['instagramURL'],
+					'xTwitterURL' => $userData['xTwitterURL'],
+					'threadURL' => $userData['threadURL'],
+					'facebookURL' => $userData['facebookURL'],
+					'businessLocation' => $userData['businessLocation'],
+					'starRating' => $userData['starRating'],
+					'businessDescription' => $userData['businessDescription'],
+					'tsId' => $userData['tsId'],
+					'isDelete' => $userData['isDelete']
+				];
+			} else {
+				http_response_code(401);  // Unauthorized
+				$response->error = "Tourism Service not exist.";
+			}
+		
+		} 
+		else {
             http_response_code(400); // Bad Request
             $response->error = "Missing required parameters";
         }
     } catch (Exception $ee) {
         http_response_code(500);
         $response->error = "Error occurred " . $ee->getMessage();
+		echo json_encode($response);
+		exit();
     }
 }
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -116,22 +162,21 @@ else if ($_SERVER["REQUEST_METHOD"] == "PUT")
 			$businessStartHour = $jsonbody->businessStartHour;
 			$businessEndHour = $jsonbody->businessEndHour;
 			$faxNumber = $jsonbody->faxNumber;
-			$instagram = $jsonbody->instagram;
-			$xTwitter = $jsonbody->xTwitter;
-			$thread = $jsonbody->thread;
-			$facebook = $jsonbody->facebook;
+			$instagramURL = $jsonbody->instagramURL;
+			$xTwitterURL = $jsonbody->xTwitterURL;
+			$threadURL = $jsonbody->threadURL;
+			$facebookURL = $jsonbody->facebookURL;
 			$businessLocation = $jsonbody->businessLocation;
 			$starRating = $jsonbody->starRating;
 			$businessDescription = $jsonbody->businessDescription;
-			$tsId = $jsonbody->tsId;
-			$isDelete = $jsonbody->isDelete;
+			
 					 
 
 			$stmt = $db->prepare("UPDATE tourismservice SET companyName = :companyName, companyAddress=:companyAddress,
             businessContactNumber=:businessContactNumber, email=:email, businessStartHour=:businessStartHour,
-			businessEndHour=:businessEndHour, faxNumber=:faxNumber, instagramURL=:instagram,
-			xTwitterURL=:xTwitter, threadURL=:thread, facebookURL=:facebook, businessLocation=:businessLocation,
-			starRating=:starRating, businessDescription=:businessDescription, tsId=:tsId, isDelete=:isDelete WHERE tourismServiceId = :tourismServiceId");
+			businessEndHour=:businessEndHour, faxNumber=:faxNumber, instagramURL=:instagramURL,
+			xTwitterURL=:xTwitterURL, threadURL=:threadURL, facebookURL=:facebookURL, businessLocation=:businessLocation,
+			starRating=:starRating, businessDescription=:businessDescription, isDelete=0 WHERE tourismServiceId = :tourismServiceId");
 			
 			$stmt->bindParam(':tourismServiceId', $tourismServiceId);
 			$stmt->bindParam(':companyName', $companyName);
@@ -141,15 +186,13 @@ else if ($_SERVER["REQUEST_METHOD"] == "PUT")
 			$stmt->bindParam(':businessStartHour', $businessStartHour);
 			$stmt->bindParam(':businessEndHour', $businessEndHour);
 			$stmt->bindParam(':faxNumber', $faxNumber);
-			$stmt->bindParam(':instagram', $instagram);
-			$stmt->bindParam(':xTwitter', $xTwitter);
-			$stmt->bindParam(':thread', $thread);
-			$stmt->bindParam(':facebook', $facebook);
+			$stmt->bindParam(':instagramURL', $instagramURL);
+			$stmt->bindParam(':xTwitterURL', $xTwitterURL);
+			$stmt->bindParam(':threadURL', $threadURL);
+			$stmt->bindParam(':facebookURL', $facebookURL);
 			$stmt->bindParam(':businessLocation', $businessLocation);
 			$stmt->bindParam(':starRating', $starRating);
 			$stmt->bindParam(':businessDescription', $businessDescription);
-			$stmt->bindParam(':tsId', $tsId);
-			$stmt->bindParam(':isDelete', $isDelete);
 			$stmt->execute();
 
 			if ($stmt->rowCount() == 1) {
@@ -159,7 +202,30 @@ else if ($_SERVER["REQUEST_METHOD"] == "PUT")
 				http_response_code(400);  // Bad Request
 				$response->error = "Failed to update Tourism Service.";
 			}
-		} else {
+		} 
+		else if(isset($jsonbody->tourismServiceId)){
+			$jsonbody = json_decode(file_get_contents('php://input'));
+
+			
+		    $tourismServiceId = $jsonbody->tourismServiceId;
+	
+			$stmt = $db->prepare("UPDATE tourismservice SET isDelete=1 where tourismServiceId=:tourismServiceId");
+			$stmt->bindParam(':tourismServiceId', $tourismServiceId);
+	
+			$stmt->execute();
+	
+			if ($stmt->rowCount() > 0) {
+				$userData = $stmt->fetch(PDO::FETCH_ASSOC);
+                http_response_code(200);
+				$response->error = "Successfully delete tourism services.";
+			} else {
+				http_response_code(401);  // Unauthorized
+				$response->error = "Tourism Service not exist.";
+			}
+		
+		}
+		else 
+		{
 			http_response_code(400);  // Bad Request
 			$response->error = "Invalid JSON format. appUserId and accessStatus are required.";
 		}
@@ -170,6 +236,8 @@ else if ($_SERVER["REQUEST_METHOD"] == "PUT")
    
 }
 
+// Before sending the JSON response, set the content type header
+header('Content-Type: application/json');
 echo json_encode($response);
 exit();
 ?>

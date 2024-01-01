@@ -172,6 +172,7 @@
               firstName: response.firstName,
               lastName: response.lastName,
               nickName: response.nickName,
+              dateOfBirth: response.dateOfBirth,
               phoneNumber: response.phoneNumber,
               email: response.email,
               password: response.password,
@@ -206,7 +207,7 @@
               if (jqXHR.status === 401) 
               {
               // Unauthorized, redirect to indexMain.html
-                window.location.href = 'indexMain.html';
+                window.location.href = 'login.html';
               } else {
                 // Handle other errors
                 console.error('AJAX Error:', textStatus, errorThrown);
