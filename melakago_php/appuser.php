@@ -107,19 +107,18 @@ else if ($_SERVER["REQUEST_METHOD"] == "PUT")
 {
 			try 
 			{
-				if (isset($jsonbody->appUserId) && isset($jsonbody->nickName)&& isset($jsonbody->phoneNumber)&& isset($jsonbody->email)&& isset($jsonbody->password)) {
+				if (isset($jsonbody->appUserId) && isset($jsonbody->nickName)&& isset($jsonbody->phoneNumber)&& isset($jsonbody->email)) {
 					 $appUserId = $jsonbody->appUserId;
 					 $nickName = $jsonbody->nickName;
 					 $phoneNumber = $jsonbody->phoneNumber;
 					 $email = $jsonbody->email;
-					 $password = $jsonbody->password;
-				
-					$stmt = $db->prepare("UPDATE appuser SET nickName = :nickName, phoneNumber=:phoneNumber, email=:email, password=:password WHERE appUserId = :appUserId");
+
+
+					$stmt = $db->prepare("UPDATE appuser SET nickName = :nickName, phoneNumber=:phoneNumber, email=:email WHERE appUserId = :appUserId");
 					$stmt->bindParam(':appUserId', $appUserId);
 					$stmt->bindParam(':nickName', $nickName);
 					$stmt->bindParam(':phoneNumber', $phoneNumber);
 					$stmt->bindParam(':email', $email);
-					$stmt->bindParam(':password', $password);
 					$stmt->execute();
 
 					if ($stmt->rowCount() == 1) {

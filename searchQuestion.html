@@ -80,7 +80,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -156,12 +156,12 @@
       <h1>Quiz Question Management</h1>
     </div><!-- End Page Title -->
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      The question is successfully saved.
+    <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+      Here is the question you were searching for.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
       Houston... we got problem.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -263,8 +263,66 @@
 
   <script>
 
-    // Retrieve the JSON string from sessionStorage
-    var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+     // Function to fetch data from the server
+    function fetchData() {
+      fetch('melakago_php/loadQuizQuestion.php')
+        .then(response => response.json())
+        .then(data => {
+          // Call a function to update the table with the fetched data
+          updateTable(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    function fetchUser(appUserId){
+      const data = {
+          appUserId : appUserId,
+      };
+
+      fetch('melakago_php/editAppUser.php', 
+      {
+            method: 'POST', // Use the POST method
+            headers: {
+            'Content-Type': 'application/json' // Set the content type to JSON
+            },
+            body: JSON.stringify(data) // Convert the data object to a JSON string
+      })
+        .then(response => response.json())
+        .then(data => {
+            // Call a function to update the table with the fetched data
+          var EditappUserProfile = 
+          {
+            appuserId: data.appUserId,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            nickName: data.nickName,
+            dateOfBirth: data.dateOfBirth,
+            phoneNumber: data.phoneNumber,
+            email: data.email,
+            password: data.password,
+            accessStatus: data.accessStatus,
+            country: data.country,
+            roleId: data.roleId,
+            points: data.points
+          };
+
+          sessionStorage.setItem('appUser', JSON.stringify(EditappUserProfile));
+    
+          console.log("HERE HOI: ",sessionStorage);
+          updateUserData()
+            
+      })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+      });
+
+    }
+
+    function updateUserData(){
+      // Retrieve the JSON string from sessionStorage
+      var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUser'));
       console.log('User Profile: ', storedAppUserProfile);
 
       // Update user nickname in the profile dropdown
@@ -282,7 +340,6 @@
 
       var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
       if (profileDropdownLink) {
-        
         var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
 
         console.log('Updating user profile information.');
@@ -290,25 +347,12 @@
         // Update profile name
         if (profileNameSpan) 
         {
-          profileNameSpan.textContent = storedAppUserProfile.nickName;
+        profileNameSpan.textContent = storedAppUserProfile.nickName;
         }
-            
+              
       } else {
         console.log('Profile dropdown link not found.');
       }
-
-
-     // Function to fetch data from the server
-    function fetchData() {
-      fetch('melakago_php/loadQuizQuestion.php')
-        .then(response => response.json())
-        .then(data => {
-          // Call a function to update the table with the fetched data
-          updateTable(data);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
     }
 
     
@@ -350,8 +394,12 @@
 
     // Wait for the DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function () {
+      var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+      var appUserId = storedAppUserProfile.appuserId;
+
       // Fetch data when the page loads
       fetchData();
+      fetchUser(appUserId);
     });
 
 
@@ -363,6 +411,8 @@
     // Get all rows in the table
     var rows = document.querySelectorAll('table tbody tr');
 
+    var companyFound = false;
+
     // Loop through each row and hide/show based on the search term
     rows.forEach(function (row) {
         // Update the selector to target the correct cell (company name)
@@ -371,10 +421,20 @@
         // Convert both the company name and the search term to lowercase for comparison
         if (companyName.includes(searchTerm)) {
             row.style.display = 'table-row';
+            companyFound = true;
         } else {
             row.style.display = 'none';
         }
     });
+
+    if(companyFound){
+      document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+    }
+    else{
+      document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+    }
    } 
 
     function displayAddQuestionPage(){
@@ -411,6 +471,8 @@
         });
         
     }
+
+
 
 
   </script>

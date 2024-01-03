@@ -136,6 +136,17 @@
 
   <main id="main" class="main">
 
+    <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+      New Question has successfully being saved.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
+      Houston....Please insert all information.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+
     <div class="pagetitle">
       <h1>Add New Quiz Question</h1>
     </div><!-- End Page Title -->
@@ -280,16 +291,7 @@
                   <!-- Add some space between the rows and the buttons -->
                   <div class="my-3"></div>
                   <div class="text-center">
-                      <button type="submit" class="btn btn-primary" onclick="addQuizQuestion(
-                        document.getElementById('questionText').value,
-                         document.getElementById('answerOption1').value,
-                        document.getElementById('answerOption2').value, 
-                        document.getElementById('answerOption3').value,
-                        document.getElementById('answerOption4').value,
-                         document.getElementById('correctAnswer').value,
-                        document.getElementById('point').value,
-                         document.getElementById('qrId').value
-                      )">Save</button>
+                      <button type="submit" class="btn btn-primary" onclick="saveQuizQuestion()">Save</button>
                       <button type="button" class="btn btn-secondary" onclick="returnToIndex()">
                         Cancel
                       </button>
@@ -504,9 +506,41 @@
 </script>
 
 <script>
+  function saveQuizQuestion() {
+    var questionText = document.getElementById('questionText').value;
+    var answerOption1 = document.getElementById('answerOption1').value;
+    var answerOption2 = document.getElementById('answerOption2').value;
+    var answerOption3 = document.getElementById('answerOption3').value;
+    var answerOption4 = document.getElementById('answerOption4').value;
+    var correctAnswer = document.getElementById('correctAnswer').value;
+    var point = document.getElementById('point').value;
+    var qrId = document.getElementById('qrId').value;
+
+    // Validate required fields
+    if (
+      questionText.trim() === '' ||
+      answerOption1.trim() === '' ||
+      answerOption2.trim() === '' ||
+      answerOption3.trim() === '' ||
+      answerOption4.trim() === '' ||
+      correctAnswer.trim() === '' ||
+      point.trim() === '' ||
+      qrId.trim() === ''
+    ) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    // Call the function to save the quiz question
+    addQuizQuestion(questionText, answerOption1, answerOption2, answerOption3, answerOption4, correctAnswer, point, qrId);
+  }
+</script>
+
+<script>
   function addQuizQuestion(questionText, answerOption1, answerOption2,
   answerOption3, answerOption4, correctAnswer, point, qrId) {
 
+    var questionAdd = false;
     // Create an object to hold the data you want to send
     const data = {
         questionText: questionText,
@@ -530,13 +564,24 @@
       .then(data => {
         // Handle the response from the server
         console.log("Question Successfully being saved ", data);
-        window.location.href = "searchQuestion.html";
+        companyFound = true;
         
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
 
+      if(companyFound)
+        {
+          document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+          document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+        }
+        else{
+          document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+          document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+        }
+
+        window.location.href = "searchQuestion.html";
 
   }
 </script>
@@ -568,6 +613,100 @@
       console.error('Error fetching data:', error);
     });
   }
+</script>
+
+<script>
+
+  function fetchUser(appUserId)
+  {
+      const data = {
+          appUserId : appUserId,
+      };
+
+      fetch('melakago_php/editAppUser.php', 
+      {
+            method: 'POST', // Use the POST method
+            headers: {
+            'Content-Type': 'application/json' // Set the content type to JSON
+            },
+            body: JSON.stringify(data) // Convert the data object to a JSON string
+      })
+        .then(response => response.json())
+        .then(data => {
+            // Call a function to update the table with the fetched data
+          var EditappUserProfile = 
+          {
+            appuserId: data.appUserId,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            nickName: data.nickName,
+            dateOfBirth: data.dateOfBirth,
+            phoneNumber: data.phoneNumber,
+            email: data.email,
+            password: data.password,
+            accessStatus: data.accessStatus,
+            country: data.country,
+            roleId: data.roleId,
+            points: data.points
+          };
+
+          sessionStorage.setItem('appUser', JSON.stringify(EditappUserProfile));
+    
+          console.log("HERE HOI: ",sessionStorage);
+          updateUserData()
+            
+      })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+      });
+
+  }
+
+  function updateUserData()
+  {
+      // Retrieve the JSON string from sessionStorage
+      var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUser'));
+      console.log('User Profile: ', storedAppUserProfile);
+
+      // Update user nickname in the profile dropdown
+      var profileDropdownHeader = document.querySelector('.dropdown-header h6');
+      if (profileDropdownHeader) 
+      {
+        console.log('Updating user nickname.');
+        profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
+
+      } 
+      else 
+      {
+        console.log('Profile dropdown header not found.');
+      }
+
+      var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
+      if (profileDropdownLink) {
+        var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
+
+        console.log('Updating user profile information.');
+
+        // Update profile name
+        if (profileNameSpan) 
+        {
+        profileNameSpan.textContent = storedAppUserProfile.nickName;
+        }
+              
+      } else {
+        console.log('Profile dropdown link not found.');
+      }
+  }
+  
+  // Wait for the DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+    var appUserId = storedAppUserProfile.appuserId;
+    
+    fetchUser(appUserId);
+  });
+
 </script>
 
 
