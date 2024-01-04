@@ -144,6 +144,16 @@
 
   <main id="main" class="main">
 
+    <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+      New Question has successfully being saved.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
+      Houston....Please insert all information needed.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <div class="pagetitle">
       <h1>Edit Tourism Service</h1>
     </div><!-- End Page Title -->
@@ -175,7 +185,7 @@
                 <form class="row g-3 needs-validation" novalidate>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Company Name</label>
+                    <label for="validationCustom02" class="form-label">Company Name<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="companyName" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -186,7 +196,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Adress 1</label>
+                    <label for="validationCustom02" class="form-label">Adress 1<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="address1" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -197,14 +207,14 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Address 2</label>
+                    <label for="validationCustom02" class="form-label">Address 2<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="address2">
                   </div>
       
                   <div class="col-12">
                     <div class="row">
                       <div class="col-md-6">
-                        <label for="validationCustom02" class="form-label">Area</label>
+                        <label for="validationCustom02" class="form-label">Area<span style="color: red;"> *</label>
                         <input type="text" class="form-control" id="area" required>
                         <div class="valid-feedback">
                           Looks good!
@@ -214,7 +224,7 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <label for="validationCustom02" class="form-label">Postcode</label>
+                        <label for="validationCustom02" class="form-label">Postcode<span style="color: red;"> *</label>
                         <input type="text" class="form-control" id="postcode" required>
                         <div class="valid-feedback">
                           Looks good!
@@ -230,7 +240,7 @@
                   <div class="col-12">
                     <div class="row">
                       <div class="col-md-6">
-                        <label for="validationCustom02" class="form-label">Phone Number</label>
+                        <label for="validationCustom02" class="form-label">Phone Number<span style="color: red;"> *</label>
                         <input type="text" class="form-control" id="businessContactNumber">
                         <div class="valid-feedback">
                           Looks good!
@@ -240,7 +250,7 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <label for="validationCustom02" class="form-label">Email</label>
+                        <label for="validationCustom02" class="form-label">Email<span style="color: red;"> *</label>
                         <input type="text" class="form-control" id="email">
                       </div>
                     </div>
@@ -249,7 +259,7 @@
                   <div class="col-12">
                     <div class="row">
                       <div class="col-md-6">
-                        <label for="validationCustom02" class="form-label">Business Start Hour</label>
+                        <label for="validationCustom02" class="form-label">Business Start Hour<span style="color: red;"> *</label>
                         <input type="text" class="form-control" id="businessStartHour" required>
                         <div class="valid-feedback">
                           Looks good!
@@ -259,7 +269,7 @@
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <label for="validationCustom02" class="form-label">Business End Hour</label>
+                        <label for="validationCustom02" class="form-label">Business End Hour<span style="color: red;"> *</label>
                         <input type="text" class="form-control" id="businessEndHour" required>
                         <div class="valid-feedback">
                           Looks good!
@@ -274,7 +284,7 @@
                   <div class="col-12">
                     <div class="row">
                       <div class="col-md-6">
-                        <label for="validationDefault04" class="form-label">Star Rating</label>
+                        <label for="validationDefault04" class="form-label">Star Rating<span style="color: red;"> *</label>
                         <select class="form-select" id="starRating" required>
                           <option selected>1</option>
                         <option>2</option>
@@ -328,7 +338,7 @@
                   </div>
       
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Business Location</label>
+                    <label for="validationCustom02" class="form-label">Business Location<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="businessLocation" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -339,7 +349,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Business Description</label>
+                    <label for="validationCustom02" class="form-label">Business Description<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="businessDescription" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -440,6 +450,26 @@
       const queryString = window.location.search;
        const urlParams = new URLSearchParams(queryString);
        const tourismServiceId = urlParams.get('tourismServiceId');
+
+      if (
+      companyName === '' ||
+      address1.trim() === '' ||
+      address2.trim() === '' ||
+      area.trim() === '' ||
+      postcode.trim() === '' ||
+      businessContactNumber.trim() === '' ||
+      email.trim() === ''||
+      businessStartHour.trim() === '' ||
+      businessEndHour.trim() === ''||
+      starRating.trim() === '' ||
+      businessLocation.trim() === ''||
+      businessDescription.trim() === '' 
+    )
+    {
+        document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+        document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+      return;
+    }
 
       if(email==null){
         email="";

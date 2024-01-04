@@ -157,7 +157,7 @@
             <form class="row g-3 align-items-center">
               <div class="col-md-6">
              
-                <label for="validationDefault04" class="form-label">Tourism Spot</label>
+                <label for="validationDefault04" class="form-label">Tourism Spot<span style="color: red;"> *</label>
 
                 <div class="input-group">
                    
@@ -190,7 +190,7 @@
                 <h5 class="card-title">Quiz Question Details</h5>
                   
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Question Text</label>
+                    <label for="validationCustom02" class="form-label">Question Text<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="questionText" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -201,7 +201,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Answer Option 1</label>
+                    <label for="validationCustom02" class="form-label">Answer Option 1<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="answerOption1" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -212,7 +212,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Answer Option 2</label>
+                    <label for="validationCustom02" class="form-label">Answer Option 2<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="answerOption2" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -223,7 +223,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Answer Option 3</label>
+                    <label for="validationCustom02" class="form-label">Answer Option 3<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="answerOption3" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -234,7 +234,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Answer Option 4</label>
+                    <label for="validationCustom02" class="form-label">Answer Option 4<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="answerOption4" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -245,20 +245,22 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Correct Answer</label>
-                    <input type="text" class="form-control" id="correctAnswer" required>
+                    <label for="correctAnswer" class="form-label">Correct Answer<span style="color: red;"> *</label>
+                    <select class="form-select" id="correctAnswer" required>
+                      <!-- Options will be dynamically added here using JavaScript -->
+                    </select>
                     <div class="valid-feedback">
                       Looks good!
                     </div>
                     <div class="invalid-feedback">
-                      Please enter Correct Answer
+                      Please select Correct Answer
                     </div>
                   </div>
 
                   <div class="col-12">
                     <div class="row">
                       <div class="col-md-6">
-                        <label for="inputState" class="form-label">Marks</label>
+                        <label for="inputState" class="form-label">Marks<span style="color: red;"> *</label>
                         <select id="point" class="form-select">
                           <option selected>10</option>
                           <option>15</option>
@@ -273,7 +275,7 @@
                       </div>
     
                     <div class="col-md-6">
-                        <label for="inputState" class="form-label">QR No</label>
+                        <label for="inputState" class="form-label">QR No<span style="color: red;"> *</label>
                         <select  class="form-select" id="qrId">
                           <option selected></option>
                           
@@ -527,7 +529,8 @@
       point.trim() === '' ||
       qrId.trim() === ''
     ) {
-      alert('Please fill in all required fields.');
+        document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+        document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
       return;
     }
 
@@ -565,23 +568,19 @@
         // Handle the response from the server
         console.log("Question Successfully being saved ", data);
         companyFound = true;
+        if(companyFound)
+        {
+          document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+          document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+        }
+        window.location.href = "searchQuestion.html";
         
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
 
-      if(companyFound)
-        {
-          document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
-          document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
-        }
-        else{
-          document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
-          document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
-        }
-
-        window.location.href = "searchQuestion.html";
+      
 
   }
 </script>
@@ -708,6 +707,70 @@
   });
 
 </script>
+
+  <!-- Add this script after your existing scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Select the input fields
+      const answerOption1 = document.getElementById('answerOption1');
+      const answerOption2 = document.getElementById('answerOption2');
+      const answerOption3 = document.getElementById('answerOption3');
+      const answerOption4 = document.getElementById('answerOption4');
+      const correctAnswerDropdown = document.getElementById('correctAnswer');
+
+      // Add event listeners to each answer option input field
+      answerOption1.addEventListener('input', updateCorrectAnswerOptions);
+      answerOption2.addEventListener('input', updateCorrectAnswerOptions);
+      answerOption3.addEventListener('input', updateCorrectAnswerOptions);
+      answerOption4.addEventListener('input', updateCorrectAnswerOptions);
+
+      // Function to update the options of the correctAnswer dropdown
+      function updateCorrectAnswerOptions() {
+        // Get the values from the answer option input fields
+        const option1Value = answerOption1.value.trim();
+        const option2Value = answerOption2.value.trim();
+        const option3Value = answerOption3.value.trim();
+        const option4Value = answerOption4.value.trim();
+
+        // Clear existing options
+        correctAnswerDropdown.innerHTML = '';
+
+        // Add default option
+        const defaultOption = document.createElement('option');
+        defaultOption.selected = true;
+        correctAnswerDropdown.appendChild(defaultOption);
+
+        // Add new options based on the answer option values
+        if (option1Value !== '') {
+          const option1 = document.createElement('option');
+          option1.value = 'answerOption1';
+          option1.textContent = option1Value;
+          correctAnswerDropdown.appendChild(option1);
+        }
+
+        if (option2Value !== '') {
+          const option2 = document.createElement('option');
+          option2.value = 'answerOption2';
+          option2.textContent = option2Value;
+          correctAnswerDropdown.appendChild(option2);
+        }
+
+        if (option3Value !== '') {
+          const option3 = document.createElement('option');
+          option3.value = 'answerOption3';
+          option3.textContent = option3Value;
+          correctAnswerDropdown.appendChild(option3);
+        }
+
+        if (option4Value !== '') {
+          const option4 = document.createElement('option');
+          option4.value = 'answerOption4';
+          option4.textContent = option4Value;
+          correctAnswerDropdown.appendChild(option4);
+        }
+      }
+    });
+  </script>
 
 
 

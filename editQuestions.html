@@ -137,6 +137,16 @@
 
   <main id="main" class="main">
 
+    <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+      New Question has successfully being saved.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
+      Houston....Please insert all information.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <div class="pagetitle">
       <h1>Edit Quiz Question</h1>
     </div><!-- End Page Title -->
@@ -150,7 +160,7 @@
                 <h5 class="card-title">Quiz Question Details</h5>
                   
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Question Text</label>
+                    <label for="validationCustom02" class="form-label">Question Text<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="questionText" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -161,7 +171,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Answer Option 1</label>
+                    <label for="validationCustom02" class="form-label">Answer Option 1<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="answerOption1" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -172,7 +182,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Answer Option 2</label>
+                    <label for="validationCustom02" class="form-label">Answer Option 2<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="answerOption2" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -183,7 +193,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Answer Option 3</label>
+                    <label for="validationCustom02" class="form-label">Answer Option 3<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="answerOption3" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -194,7 +204,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Answer Option 4</label>
+                    <label for="validationCustom02" class="form-label">Answer Option 4<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="answerOption4" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -205,7 +215,7 @@
                   </div>
 
                   <div class="col-12">
-                    <label for="validationCustom02" class="form-label">Correct Answer</label>
+                    <label for="validationCustom02" class="form-label">Correct Answer<span style="color: red;"> *</label>
                     <input type="text" class="form-control" id="correctAnswer" required>
                     <div class="valid-feedback">
                       Looks good!
@@ -218,8 +228,8 @@
                   <div class="col-12">
                     <div class="row">
                       <div class="col-md-6">
-                        <label for="inputState" class="form-label">Marks</label>
-                        <select id="point" class="form-select">
+                        <label for="inputState" class="form-label">Marks<span style="color: red;"> *</label>
+                        <select id="point" class="form-select" required>
                           <option selected>10</option>
                           <option>15</option>
                           <option>20</option>
@@ -233,7 +243,7 @@
                       </div>
     
                       <div class="col-md-6">
-                        <label for="validationCustom02" class="form-label">QR Spot</label>
+                        <label for="validationCustom02" class="form-label">QR Spot<span style="color: red;"> *</label>
                         <input type="text" class="form-control" id="qrId" required readonly>
                         <div class="valid-feedback">
                           Looks good!
@@ -316,6 +326,22 @@
        const queryString = window.location.search;
        const urlParams = new URLSearchParams(queryString);
        const questionId = urlParams.get('questionId');
+
+       if (
+      questionText.trim() === '' ||
+      answerOption1.trim() === '' ||
+      answerOption2.trim() === '' ||
+      answerOption3.trim() === '' ||
+      answerOption4.trim() === '' ||
+      correctAnswer.trim() === '' ||
+      point.trim() === '' ||
+      qrId.trim() === ''
+      ) {
+        document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+        document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+      return;
+      }
+
 
 
         // Create an object to hold the data you want to send

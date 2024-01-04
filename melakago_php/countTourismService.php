@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST['tsId'])){
 			
 			$tsId = $_POST['tsId'];
-			$stmt = $db->prepare("SELECT COUNT(*) as count FROM tourismservice WHERE tsId = :tsId");
+			$stmt = $db->prepare("SELECT COUNT(*) as count FROM tourismservice WHERE tsId = :tsId and isDelete=0");
 			
 			$stmt->bindParam(':tsId', $tsId);
 			$stmt->execute();

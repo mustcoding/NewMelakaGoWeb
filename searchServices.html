@@ -154,12 +154,12 @@
       <h1>Tourism Services Management</h1>
     </div><!-- End Page Title -->
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      The question is successfully saved.
+    <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+      Here is the tourism services you were searching for.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
       Houston... we got problem.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -405,6 +405,8 @@
     // Get all rows in the table
     var rows = document.querySelectorAll('table tbody tr');
 
+    var companyFound = false;
+
     // Loop through each row and hide/show based on the search term
     rows.forEach(function (row) {
         // Update the selector to target the correct cell (company name)
@@ -413,10 +415,20 @@
         // Convert both the company name and the search term to lowercase for comparison
         if (companyName.includes(searchTerm)) {
             row.style.display = 'table-row';
+            companyFound = true;
         } else {
             row.style.display = 'none';
         }
     });
+
+    if(companyFound){
+      document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+    }
+    else{
+      document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+    }
   }
 
 
