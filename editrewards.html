@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Forms / Layouts - NiceAdmin Bootstrap Template</title>
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Nov 17 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+   <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="indexSA.html" class="logo d-flex align-items-center">
+        <img src="assets/img/MelakaGo.png" alt="">
+        <span class="d-none d-lg-block">MelakaGo</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+    <nav class="header-nav ms-auto">
+      <!-- Navigation items go here -->
+    </nav><!-- End Icons Navigation -->
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="indexSA.html">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="rewards.html">
+          <i class="bi bi-ticket-detailed"></i><span>Rewards</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="rewards.html">
+              <i class="bi bi-circle"></i><span>Reward Management</span>
+            </a>
+          </li>
+          <li>
+
+            <a href="addrewards.html">
+              <i class="bi bi-circle"></i><span>Add Reward</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!-- Add more sidebar items as needed -->
+    </ul>
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Edit Reward</h1>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Reward Details</h5>
+
+<!-- Custom Styled Validation -->
+
+<div id="successMessageEdit" class="alert alert-success" style="display: none;">
+  Reward successfully updated!
+</div>
+
+<form id="rewardForm" class="row g-3 needs-validation" novalidate>
+  <div class="col-12">
+    <label for="validationCustom01" class="form-label">Reward Name</label>
+    <input type="text" class="form-control" id="validationCustom01" required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+      Please enter Reward Name!
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-md-6">
+        <label for="validationDefault04" class="form-label">Reward Points</label>
+        <select class="form-select" id="validationDefault04" required>
+          <option selected>100</option>
+                                    <option> 200</option>
+                                    <option> 300</option>
+                                    <option> 400</option>
+                                    <option> 500</option>
+                                    <option> 600</option>
+                                    <option> 700</option>
+                                    <option> 800</option>
+                                    <option> 900</option>
+                                    <option>1000</option>
+                                    <option>1100</option>
+                                    <option>1200</option>
+                                    <option>1300</option>
+                                    <option>1400</option>
+                                    <option>1500</option>
+                                    <option>1600</option>
+                                    <option>1700</option>
+                                    <option>1800</option>
+                                    <option>1900</option>
+                                    <option>2000</option>
+                                    <option>2100</option>
+                                    <option>2200</option>
+                                    <option>2300</option>
+                                    <option>2400</option>
+                                    <option>2500</option>
+                                    <option>2600</option>
+                                    <option>2700</option>
+                                    <option>2800</option>
+                                    <option>2900</option>
+                                    <option>3000</option>        </select>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please select a valid points!
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="validationDefault02" class="form-label">Reward Code</label>
+        <input type="text" class="form-control" id="validationDefault02" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please enter Reward Code!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <label for="validationCustom02" class="form-label">Terms & Conditions</label>
+    <input type="text" class="form-control" id="validationCustom02" required>
+    <div class="valid-feedback">
+      Looks good!
+    </div>
+    <div class="invalid-feedback">
+      Please enter Terms & Conditions!
+    </div>
+  </div>
+  <div class="text-center">
+    <button type="button" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary">Cancel</button>
+  </div>
+</form><!-- End Custom Styled Validation -->
+
+<!-- Success Message -->
+<div id="successMessageEdit" class="alert alert-success d-none" role="alert">
+  Reward has been successfully updated!
+</div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <!-- Add only the necessary scripts here if required -->
+<!-- Add this script section at the end of your HTML body -->
+<script>
+  // Get the rewardId from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const rewardId = urlParams.get('rewardId');
+
+ if (typeof rewardId !== 'undefined' && rewardId !== null) {
+    // Fetch reward data from the server based on the rewardId
+    fetch(`melakago_php/getReward.php?rewardId=${rewardId}`)
+      .then(response => response.json())
+      .then(data => {
+        // Check if the response contains reward data
+        if (data.reward) {
+          // Populate the form fields with existing data
+          document.getElementById('validationCustom01').value = data.reward.rewardName;
+          document.getElementById('validationDefault04').value = data.reward.rewardPoint;
+          document.getElementById('validationDefault02').value = data.reward.rewardCode;
+          document.getElementById('validationCustom02').value = data.reward.tnc;
+        } else {
+          console.error('Reward data not found');
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching reward data:', error);
+      });
+
+    // Handle Save button click
+    document.querySelector('.btn-primary').addEventListener('click', function () {
+      // Gather modified data from the form
+      const modifiedData = {
+        rewardName: document.getElementById('validationCustom01').value,
+        rewardPoint: document.getElementById('validationDefault04').value,
+        rewardCode: document.getElementById('validationDefault02').value,
+        tnc: document.getElementById('validationCustom02').value,
+      };
+
+      // Send the modified data to the server to update the reward
+      fetch(`melakago_php/editReward.php?rewardId=${rewardId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(modifiedData),
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Handle the response from the server
+          console.log('Update response:', data);
+
+
+        })
+        .catch(error => {
+          console.error('Error updating reward data:', error);
+        });
+
+// Show the success message
+var successMessageElement = document.getElementById('successMessageEdit');
+if (successMessageElement) {
+  successMessageElement.style.display = 'block';
+}
+
+
+
+    });
+  } else {
+    console.error('Reward ID is undefined or null');
+    console.log('URL Params:', urlParams);
+  }
+
+
+</script>
+
+
+</body>
+
+</html>
+

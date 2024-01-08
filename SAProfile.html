@@ -60,157 +60,25 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
+        <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+          Password Successfully being saved...
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    
+        <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
+          Houston... New Password Doesn't Match The Confirmation Password.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6>Hi, User!</h6>
               <span>SYSTEM ADMIN</span>
             </li>
             <li>
@@ -226,9 +94,9 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+          
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="login.html">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -252,6 +120,7 @@
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
+        
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
@@ -265,19 +134,14 @@
             </a>
           </li>
           <li>
-            <a href="searchReward.html">
-              <i class="bi bi-circle"></i><span>Search Rewards</span>
-            </a>
-          </li>
-          <li>
+
             <a href="addrewards.html">
               <i class="bi bi-circle"></i><span>Add Reward</span>
             </a>
           </li>
         </ul>
     </li><!-- End Components Nav -->
-
-    </ul>
+   </ul>
 
   </aside><!-- End Sidebar-->
 
@@ -301,10 +165,8 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <h2>Kevin Anderson</h2>
+              <h2 id="userName"></h2>
               <h3>SYSTEM ADMIN</h3>
-           
             </div>
           </div>
 
@@ -338,32 +200,32 @@
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                    <div class="col-lg-9 col-md-8" id="fullName"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Nick Name</div>
-                    <div class="col-lg-9 col-md-8">Kevin</div>
+                    <div class="col-lg-9 col-md-8" id="nickName"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Date Of Birth</div>
-                    <div class="col-lg-9 col-md-8">2001-05-20</div>
+                    <div class="col-lg-9 col-md-8" id="DOB"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone Number</div>
-                    <div class="col-lg-9 col-md-8">01115009757</div>
+                    <div class="col-lg-9 col-md-8" id="phoneNumber"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
-                    <div class="col-lg-9 col-md-8">mahmormust@gmail.com</div>
+                    <div class="col-lg-9 col-md-8" id="email"></div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Role</div>
-                    <div class="col-lg-9 col-md-8">Business Spot Data Collector</div>
+                    <div class="col-lg-9 col-md-8">System Admin</div>
                   </div>
 
                 </div>
@@ -371,39 +233,45 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <form onsubmit="return confirmEdit(this);">
+
+<div id="successMessage" class="alert alert-success" style="display: none;">
+  Profile successfully updated!
+</div>
+
 
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nick Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="Kevin">
+                        <input name="fullName" type="text" class="form-control" id="editNickName" value="Kevin">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Phone Number</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="01115009757">
+                        <input name="fullName" type="text" class="form-control" id="editPhoneNumber" value="01115009757">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="mahmormust@gmail.com">
+                        <input name="fullName" type="text" class="form-control" id="editEmail" value="mahmormust@gmail.com">
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </div>
+			<button type="submit" class="btn btn-primary" onClick="confirmEdit(this.form)">Save Changes</button>
+                    
+		    </div>
                   </form><!-- End Profile Edit Form -->
 
                 </div>
 
                 <div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
-                  <form>
+                  <form onsubmit ="return confirmChangePassword(this);">
 
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
@@ -415,19 +283,19 @@
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                        <input name="newpassword" type="password" class="form-control" id="newPassword1">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                        <input name="renewpassword" type="password" class="form-control" id="confirmPassword">
                       </div>
                     </div>
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
+                      <button type="submit" class="btn btn-primary" onClick="confirmChangePassword()">Change Password</button>
                     </div>
                   </form><!-- End Change Password Form -->
 
@@ -475,14 +343,79 @@
 
   <script>
 
-    console.log('DOMContentLoaded event fired.');
-
     // Retrieve the JSON string from sessionStorage
     var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
     console.log('User Profile: ', storedAppUserProfile);
 
+    function displayAddServicesPage(){
+      window.open('tourismserviceadd.html','_self');
+    }
+
+  </script>
+
+<script>
+
+  function fetchUser(appUserId)
+  {
+      const data = {
+          appUserId : appUserId,
+      };
+
+      fetch('melakago_php/editAppUser.php', 
+      {
+            method: 'POST', // Use the POST method
+            headers: {
+            'Content-Type': 'application/json' // Set the content type to JSON
+            },
+            body: JSON.stringify(data) // Convert the data object to a JSON string
+      })
+        .then(response => response.json())
+        .then(data => {
+            // Call a function to update the table with the fetched data
+          var EditappUserProfile = 
+          {
+            appuserId: data.appUserId,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            nickName: data.nickName,
+            dateOfBirth: data.dateOfBirth,
+            phoneNumber: data.phoneNumber,
+            email: data.email,
+            password: data.password,
+            accessStatus: data.accessStatus,
+            country: data.country,
+            roleId: data.roleId,
+            points: data.points
+          };
+
+          sessionStorage.setItem('appUser', JSON.stringify(EditappUserProfile));
+    
+          console.log("HERE HOI: ",sessionStorage);
+          updateUserData()
+            
+      })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+      });
+
+  }
+
+  function updateUserData()
+  {
+    // Retrieve the JSON string from sessionStorage
+    var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUser'));
+    console.log('User Profile: ', storedAppUserProfile);
+
+    // Update the user's name in the "Profile" card
+    var userNameElement = document.getElementById('userName');
+    if (userNameElement) {
+      userNameElement.textContent = storedAppUserProfile.firstName + ' ' + storedAppUserProfile.lastName;
+    } else {
+      console.log('Element with ID "userName" not found.');
+    }
+
     // Update user nickname in the profile dropdown
-    var profileDropdownHeader = document.querySelector('.dropdown-menu .dropdown-header h6');
+    var profileDropdownHeader = document.querySelector('.dropdown-header h6');
     if (profileDropdownHeader) 
     {
       console.log('Updating user nickname.');
@@ -496,7 +429,7 @@
 
     var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
     if (profileDropdownLink) {
-      
+        
       var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
 
       console.log('Updating user profile information.');
@@ -504,16 +437,356 @@
       // Update profile name
       if (profileNameSpan) 
       {
-        profileNameSpan.textContent = storedAppUserProfile.nickName;
+       profileNameSpan.textContent = storedAppUserProfile.nickName;
       }
-          
+            
     } else {
       console.log('Profile dropdown link not found.');
     }
 
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('fullName');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.firstName + ' ' + storedAppUserProfile.lastName;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
 
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('nickName');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.nickName;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('DOB');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.dateOfBirth;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('phoneNumber');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.phoneNumber;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('email');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.email;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Profile Edit Form with data from localStorage
+    document.getElementById('editNickName').value = storedAppUserProfile.nickName;
+    document.getElementById('editPhoneNumber').value = storedAppUserProfile.phoneNumber;
+    document.getElementById('editEmail').value = storedAppUserProfile.email;
+
+
+
+  }
+  
+  // Wait for the DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+    var appUserId = storedAppUserProfile.appuserId;
+    
+    fetchUser(appUserId);
+  });
+
+</script>
+
+  <script>
+    function confirmEdit(form) {
+    // Check if the form is defined
+    if (!form) {
+        console.error('Form is not defined.');
+        return false;
+    }
+    // Retrieve values from the form
+    var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+    var appUserId = storedAppUserProfile.appuserId;
+    var nickName = form.elements['editNickName'].value;
+    var phoneNumber = form.elements['editPhoneNumber'].value;
+    var email = form.elements['editEmail'].value;
+
+      // Do something with the values (e.g., display in console for demonstration)
+
+      console.log('ID::: ', appUserId)
+      console.log('Nick Name:', nickName);
+      console.log('Phone Number:', phoneNumber);
+      console.log('Email:', email);
+
+      // Create an object to hold the data you want to send
+      const data = {
+          appUserId : appUserId,
+          nickName: nickName,
+          phoneNumber: phoneNumber,
+          email: email,
+      };
+
+fetch('melakago_php/editAppUser.php', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Handle successful response
+  })
+  .catch(error => {
+    console.error('Fetch error:', error);
+  });
+
+  // Show the success message
+  var successMessageElement = document.getElementById('successMessage');
+  if (successMessageElement) {
+    successMessageElement.style.display = 'block';
+  }
+      return false;
+    }
+  </script>
+
+  <script>
+
+    // Function to fetch data from the server
+    function fetchNewData(appUserId) {
+      const data = {
+          appUserId : appUserId,
+      };
+
+      fetch('melakago_php/editAppUser.php', 
+      {
+            method: 'POST', // Use the POST method
+            headers: {
+            'Content-Type': 'application/json' // Set the content type to JSON
+            },
+            body: JSON.stringify(data) // Convert the data object to a JSON string
+      })
+        .then(response => response.json())
+        .then(data => {
+            // Call a function to update the table with the fetched data
+          var EditappUserProfile = 
+          {
+
+            appuserId: data.appUserId,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            nickName: data.nickName,
+            dateOfBirth: data.dateOfBirth,
+            phoneNumber: data.phoneNumber,
+            email: data.email,
+            password: data.password,
+            accessStatus: data.accessStatus,
+            country: data.country,
+            roleId: data.roleId,
+            points: data.points
+          };
+
+          sessionStorage.setItem('appUserEdit', JSON.stringify(EditappUserProfile));
+    
+          console.log("HERE HOI: ",sessionStorage);
+          updateAfterEdit()
+            
+      })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+      });
+      
+    }
 
   </script>
+
+  <script>
+    function updateAfterEdit(){
+      // Retrieve the JSON string from sessionStorage
+    var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserEdit'));
+    console.log('User Profile: ', storedAppUserProfile);
+
+    // Update the user's name in the "Profile" card
+    var userNameElement = document.getElementById('userName');
+    if (userNameElement) {
+      userNameElement.textContent = storedAppUserProfile.firstName + ' ' + storedAppUserProfile.lastName;
+    } else {
+      console.log('Element with ID "userName" not found.');
+    }
+
+    // Update user nickname in the profile dropdown
+    var profileDropdownHeader = document.querySelector('.dropdown-header h6');
+    if (profileDropdownHeader) 
+    {
+      console.log('Updating user nickname.');
+      profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
+
+    } 
+    else 
+    {
+      console.log('Profile dropdown header not found.');
+    }
+
+    var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
+    if (profileDropdownLink) {
+        
+      var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
+
+      console.log('Updating user profile information.');
+
+      // Update profile name
+      if (profileNameSpan) 
+      {
+       profileNameSpan.textContent = storedAppUserProfile.nickName;
+      }
+            
+    } else {
+      console.log('Profile dropdown link not found.');
+    }
+
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('fullName');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.firstName + ' ' + storedAppUserProfile.lastName;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('nickName');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.nickName;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('DOB');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.dateOfBirth;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('phoneNumber');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.phoneNumber;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Full Name in the "Profile Overview" section
+    var fullNameElement = document.getElementById('email');
+    if (fullNameElement) {
+      fullNameElement.textContent = storedAppUserProfile.email;
+    } else {
+      console.log('Element with ID "fullName" not found.');
+    }
+
+    // Update the Profile Edit Form with data from localStorage
+    document.getElementById('editNickName').value = storedAppUserProfile.nickName;
+    document.getElementById('editPhoneNumber').value = storedAppUserProfile.phoneNumber;
+    document.getElementById('editEmail').value = storedAppUserProfile.email;
+
+    }
+  </script>
+
+<script>
+  function confirmChangePassword(form) {
+
+    var passwordSame = false;
+    var passwordChanged = false;
+
+    // Get the questionId from the URL
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const appUserId = urlParams.get('appUserId');
+
+    var currentPassword = form.elements['currentPassword'].value;
+    var newPassword1 = form.elements['newPassword1'].value;
+    var confirmPassword = form.elements['confirmPassword'].value;
+
+    if (newPassword1 === confirmPassword) {
+      // Passwords match, you can proceed with further actions
+      passwordSame = true;
+      console.log("Passwords match");
+    } else {
+      // Passwords do not match, handle the error or display a message
+      console.log("Passwords do not match");
+      // You might want to add code here to inform the user or take appropriate action
+    }
+
+    if(passwordSame){
+
+      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+      // Do something with the values (e.g., display in console for demonstration)
+
+      console.log('ID::: ', appUserId)
+      console.log('currentPassword', currentPassword);
+      console.log('newPassword1:', newPassword1);
+      console.log('confrimPassword:', confirmPassword);
+
+      // Create an object to hold the data you want to send
+      const data = {
+        appUserId : appUserId,
+        password: confirmPassword,
+      };
+
+      fetch('melakago_php/editAppUser.php', 
+      {
+            method: 'PUT', // Use the POST method
+            headers: {
+            'Content-Type': 'application/json' // Set the content type to JSON
+            },
+            body: JSON.stringify(data) // Convert the data object to a JSON string
+      })
+        .then(response => response.json())
+        .then(data => {
+            var passwordChanged = true;
+            // Handle the response from the server
+            console.log("ID SEND : ", data.appUserId);
+
+            if(passwordChanged){
+              document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+              document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+
+            }
+            else{
+              document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+              document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+            }
+
+            fetchNewData(appUserId);
+            
+      })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+      });
+
+    }
+    else{
+      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+    }
+
+    // Add your logic here to update the user profile or perform other actions
+
+    // Return false to prevent the form from submitting (since you're handling it with JavaScript)
+    return false;
+  }
+</script>
 
 </body>
 

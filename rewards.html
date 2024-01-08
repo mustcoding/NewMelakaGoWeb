@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,19 +48,15 @@
       .logo img {
         border-radius: 50%; /* Set border-radius to 50% for a circular or oval shape */
       }
-    </style>
+  .button-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adjust the gap between buttons */
+  }
 
-    <style>
-      .button-column {
-        display: flex;
-        flex-direction: column;
-        gap: 10px; /* Adjust the gap between buttons */
-      }
-
-      .btn-action {
-        width: 80% !important; /* Use !important to ensure that this style takes precedence */
-        text-align: center;
-      }
+  .btn-action {
+    text-align: center;
+  }
     </style>
 
     <div class="d-flex align-items-center justify-content-between">
@@ -72,12 +69,20 @@
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
+          </a><!-- End Notification Icon -->
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          </ul><!-- End Notification Dropdown Items -->
+        </li><!-- End Notification Nav -->     
+          </a><!-- End Messages Icon -->
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+          </ul><!-- End Messages Dropdown Items -->
+
+        </li><!-- End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -100,7 +105,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="login.html">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -137,11 +142,7 @@
             </a>
           </li>
           <li>
-            <a href="searchReward.html">
-              <i class="bi bi-circle"></i><span>Search Rewards</span>
-            </a>
-          </li>
-          <li>
+
             <a href="addrewards.html">
               <i class="bi bi-circle"></i><span>Add Reward</span>
             </a>
@@ -168,7 +169,26 @@
               <h5 class="card-title">
                 List of Rewards
               </h5>
+<div id="successMessageEdit" class="alert alert-success" style="display: none;">
+  Reward successfully deleted!
+</div>
 
+    <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+      Here is the reward you were searching for.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
+      Reward is not exist...
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<div class="mb-3">
+            <label for="searchRewards" class="form-label">Search Rewards:</label>
+            <input type="text" class="form-control" id="searchRewards" placeholder="Enter reward name">
+          </div>
+
+  <!-- Add the Search button -->
+  <button type="button" class="btn btn-primary" onclick="searchRewards()">Search</button>
               <!-- Default Table -->
               <table class="table">
                 <thead>
@@ -227,21 +247,111 @@
   <script src="assets/js/main.js"></script>
 
 
-  <script>
+<script>
+    // Function to search rewards
+    function searchRewards() {
+      // Get the search term
+      var searchTerm = document.getElementById('searchRewards').value.toLowerCase();
+    console.log('KEYWORD:',searchTerm);
+
+      // Get all rows in the table
+      var rows = document.querySelectorAll('table tbody tr');
+
+  	// Variable to check if any row matches the search term
+	var rewardFound = false;
+
+      // Loop through each row and hide/show based on the search term
+      rows.forEach(function (row) {
+
+        var rewardName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+        if (rewardName.includes(searchTerm)) {
+          row.style.display = 'table-row';
+	  rewardFound = true;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+    if(rewardFound){
+      document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+    }
+    else{
+      document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+    }
+    }
+
 
     function displayAddRewardPage(){
-      window.open('addrewards.html','_self');
-    }
-  </script>
+        // Log the generated URL with rewardId to the console
+        console.log('Add Reward URL:', 'addrewards.html');
 
-<!-- Add this script section at the end of your HTML body -->
-<script>
+        // Open the addrewards.html page
+        window.open('addrewards.html', '_self');
+    }
+
+// Function to delete a reward
+function deleteReward(rewardId) {
+    // Show a confirmation dialog to the user
+    var isConfirmed = window.confirm("Are you sure you want to delete this reward?");
+
+    // Check if the user confirmed the action
+    if (isConfirmed) {
+        console.log('RewardId:', rewardId);
+
+        // Make an asynchronous DELETE request to the PHP script
+        fetch('melakago_php/deleteReward.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ rewardId: rewardId }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Log the server response to the console
+                console.log('Delete Reward Response:', data);
+
+                // Check if the deletion was successful
+                if (data.success) {
+                    // Refresh the rewards list after deletion
+                    fetchRewards();
+                    // Show the success message
+                aaaaementById('successMessageEdit');
+                    if (successMessageElement) {
+                        successMessageElement.style.display = 'block';
+                    }
+
+                } else {
+                    // Handle the case when deletion fails
+                    console.error('Error deleting reward:', data.message);
+                }
+            })
+            .catch(error => {
+                // Handle errors during the fetch
+                console.error('Error deleting reward:', error);
+            });
+// Show the success message
+var successMessageElement = document.getElementById('successMessageEdit');
+if (successMessageElement) {
+  successMessageElement.style.display = 'block';
+}
+
+    }
+}
+
+
   // Function to fetch rewards from the server
-  function fetchRewards() {
-    // Make an asynchronous GET request to the PHP script
+function fetchRewards() {
+  // Make an asynchronous GET request to the PHP script
   fetch('melakago_php/listReward.php')
       .then(response => response.json())
       .then(data => {
+        // Log the rewards data to the console
+        console.log('Rewards data:', data.rewards);
+
         // Check if the response contains rewards
         if (data.rewards) {
           // Get the table body element
@@ -250,8 +360,10 @@
           // Clear existing rows
           tableBody.innerHTML = '';
 
+
+
           // Iterate over each reward and create a table row
-          data.rewards.forEach((reward, index) => {
+	    data.rewards.forEach((reward, index) => {
             var row = `<tr>
                           <td>${index + 1}</td>
                           <td>${reward.rewardName}</td>
@@ -259,10 +371,10 @@
                           <td>${reward.rewardCode}</td>
                           <td>${reward.tnc}</td>
                           <td>
-                            <div class="button-column">
-                              <button type="button" class="btn btn-primary" onclick="editReward(${reward.rewardId})">Edit</button>
-                              <button type="button" class="btn btn-danger" onclick="deleteReward(${reward.rewardId})">Delete </button>
-                            </div>
+                        <div class="button-column">
+                      <a href="editrewards.html?rewardId=${reward.rewardId}" class="btn btn-primary btn-action">Edit</a>
+                      <button type="button" class="btn btn-danger btn-action" onclick="deleteReward(${reward.rewardId})">Delete</button>
+                        </div>
                           </td>
                        </tr>`;
             // Append the row to the table body
@@ -277,73 +389,108 @@
         // Handle errors during the fetch
         console.error('Error fetching rewards:', error);
       });
-  }
+}
 
-  // Call the fetchRewards function when the page loads
-  window.onload = function() {
-    fetchRewards();
-  };
+// Call the fetchRewards function when the page loads
+window.onload = function() {
+  fetchRewards();
+};
 
-  function editReward(rewardId){
-      window.open('login.html','_self');
-    }
-
-    function deleteReward(rewardId){
-      window.open('login.html','_self');
-    }
 </script>
 
-<script>
+ <script>
 
-  console.log('DOMContentLoaded event fired.');
-
-  // Retrieve the JSON string from sessionStorage
-  var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
-  console.log('User Profile: ', storedAppUserProfile);
-
-  // Update user nickname in the profile dropdown
-  var profileDropdownHeader = document.querySelector('.dropdown-menu .dropdown-header h6');
-  if (profileDropdownHeader) 
-  {
-    console.log('Updating user nickname.');
-    profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
-
-  } 
-  else 
-  {
-    console.log('Profile dropdown header not found.');
-  }
-
-  var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
-  if (profileDropdownLink) {
-    
-    var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
-
-    console.log('Updating user profile information.');
-
-    // Update profile name
-    if (profileNameSpan) 
+    function fetchUser(appUserId)
     {
-      profileNameSpan.textContent = storedAppUserProfile.nickName;
+        const data = {
+            appUserId : appUserId,
+        };
+
+        fetch('melakago_php/editAppUser.php', 
+        {
+              method: 'POST', // Use the POST method
+              headers: {
+              'Content-Type': 'application/json' // Set the content type to JSON
+              },
+              body: JSON.stringify(data) // Convert the data object to a JSON string
+        })
+          .then(response => response.json())
+          .then(data => {
+              // Call a function to update the table with the fetched data
+            var EditappUserProfile = 
+            {
+              appuserId: data.appUserId,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              nickName: data.nickName,
+              dateOfBirth: data.dateOfBirth,
+              phoneNumber: data.phoneNumber,
+              email: data.email,
+              password: data.password,
+              accessStatus: data.accessStatus,
+              country: data.country,
+              roleId: data.roleId,
+              points: data.points
+            };
+
+            sessionStorage.setItem('appUser', JSON.stringify(EditappUserProfile));
+      
+            console.log("HERE HOI: ",sessionStorage);
+            updateUserData()
+              
+        })
+          .catch(error => {
+              console.error('Error fetching data:', error);
+        });
+
     }
-        
-  } else {
-    console.log('Profile dropdown link not found.');
-  }
 
+    function updateUserData()
+    {
+        // Retrieve the JSON string from sessionStorage
+        var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUser'));
+        console.log('User Profile: ', storedAppUserProfile);
 
+        // Update user nickname in the profile dropdown
+        var profileDropdownHeader = document.querySelector('.dropdown-header h6');
+        if (profileDropdownHeader) 
+        {
+          console.log('Updating user nickname.');
+          profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
 
-</script>
+        } 
+        else 
+        {
+          console.log('Profile dropdown header not found.');
+        }
 
-<script>
-   function editReward(rewardId){
-      window.open('login.html','_self');
+        var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
+        if (profileDropdownLink) {
+          var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
+
+          console.log('Updating user profile information.');
+
+          // Update profile name
+          if (profileNameSpan) 
+          {
+          profileNameSpan.textContent = storedAppUserProfile.nickName;
+          }
+                
+        } else {
+          console.log('Profile dropdown link not found.');
+        }
     }
+    
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
 
-    function deleteReward(rewardId){
-      window.open('login.html','_self');
-    }
-</script>
+      var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+      var appUserId = storedAppUserProfile.appuserId;
+      
+      fetchUser(appUserId);
+    });
+
+  </script>
 
 
 </body>

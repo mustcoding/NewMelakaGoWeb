@@ -55,6 +55,7 @@
         <img src="assets/img/MelakaGo.png" alt="">
         <span class="d-none d-lg-block">MelakaGo</span>
       </a>
+      <!-- <a href="#" id="userProfileLink" class="some-class"></a>-->
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
@@ -65,7 +66,6 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
             <span class="d-none d-md-block dropdown-toggle ps-2">Hi, User! </span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -79,7 +79,8 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="SAProfile.html">
+              <a class="dropdown-item d-flex align-items-center" href="userProfile.html" id="userProfileLink">
+
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -88,7 +89,7 @@
               <hr class="dropdown-divider">
             </li>
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="login.html">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -124,11 +125,7 @@
             </a>
           </li>
           <li>
-            <a href="searchReward.html">
-              <i class="bi bi-circle"></i><span>Search Rewards</span>
-            </a>
-          </li>
-          <li>
+ 
             <a href="addrewards.html">
               <i class="bi bi-circle"></i><span>Add Reward</span>
             </a>
@@ -244,88 +241,6 @@
   
               </div><!-- End INTERNATIONAL USER Card -->
 
-            <!-- Reports -->
-            <div class="col-12">
-              <div class="card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                  <!-- Line Chart -->
-                  <div id="reportsChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
-
-                </div>
-
-              </div>
-            </div><!-- End Reports -->
-
           </div>
         </div><!-- End Left side columns -->
 
@@ -349,9 +264,9 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -373,45 +288,53 @@
           localUser=0,
           totalUser=0;
  
-    document.addEventListener("DOMContentLoaded", function ()
-    {
-       
-      console.log('DOMContentLoaded event fired.');
+document.addEventListener("DOMContentLoaded", function () {
+  console.log('DOMContentLoaded event fired.');
 
-      // Retrieve the JSON string from sessionStorage
-      var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
-      console.log('User Profile: ', storedAppUserProfile);
+  // Retrieve the JSON string from sessionStorage DONE
+  var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+  console.log('User Profile: ', storedAppUserProfile);
 
-      // Update user nickname in the profile dropdown
-      var profileDropdownHeader = document.querySelector('.dropdown-menu .dropdown-header h6');
-      if (profileDropdownHeader) 
-      {
-        console.log('Updating user nickname.');
-        profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
 
-      } 
-      else 
-      {
-        console.log('Profile dropdown header not found.');
-      }
+  // Update user nickname in the profile dropdown
+  var profileDropdownHeader = document.querySelector('.dropdown-menu .dropdown-header h6');
+  if (profileDropdownHeader) {
+    console.log('Updating user nickname.');
+    profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " + storedAppUserProfile.lastName;
+  } else {
+    console.log('Profile dropdown header not found.');
+  }
 
-      var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
-      if (profileDropdownLink) {
-        
-        var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
+  // Update user profile information in the navigation link
+  var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
 
-        console.log('Updating user profile information.');
+  if (profileDropdownLink) {
+    var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
+    console.log('Updating user profile information.');
 
-        // Update profile name
-        if (profileNameSpan) 
-        {
-          profileNameSpan.textContent = storedAppUserProfile.nickName;
-        }
-            
+    // Update profile name
+    if (profileNameSpan) {
+      profileNameSpan.textContent = storedAppUserProfile.nickName;
+    }
+  } else {
+    console.log('Profile dropdown link not found.');
+  }
+
+  // Construct the profile URL
+  var appUserId = storedAppUserProfile.appuserId;
+
+      // Update the href attribute with the appUserId
+      var userProfileLink = document.getElementById('userProfileLink');
+      if (userProfileLink) {
+        userProfileLink.href = "SAProfile.html?appUserId=" + appUserId;
       } else {
-        console.log('Profile dropdown link not found.');
+        console.error('User profile link not found.');
       }
 
+      console.log("Date Of Birth: ", storedAppUserProfile.dateOfBirth);
+
+      // Array to store promises for each AJAX call
+      var promises = [];
   
         function makeAjaxRequest(url, data) {
         return new Promise(function (resolve, reject) {
@@ -434,8 +357,6 @@
         });
       }
 
-      // Array to store promises for each AJAX call
-      var promises = [];
 
       // AJAX call to calculate total tourist register MelakaGo
       promises.push(makeAjaxRequest("melakago_php/TotalUsersCount.php", { roleId: 4 }));
@@ -490,6 +411,99 @@
 
     });
 </script>
+
+ <script>
+
+    function fetchUser(appUserId)
+    {
+        const data = {
+            appUserId : appUserId,
+        };
+
+fetch('melakago_php/editAppUser.php', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log('Response:', data);
+              // Call a function to update the table with the fetched data
+            var EditappUserProfile = 
+            {
+              appuserId: data.appUserId,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              nickName: data.nickName,
+              dateOfBirth: data.dateOfBirth,
+              phoneNumber: data.phoneNumber,
+              email: data.email,
+              password: data.password,
+              accessStatus: data.accessStatus,
+              country: data.country,
+              roleId: data.roleId,
+              points: data.points
+    };
+
+    sessionStorage.setItem('appUser', JSON.stringify(EditappUserProfile));
+    console.log('HERE HOI: ', sessionStorage);
+    updateUserData();
+  })
+  .catch(error => {
+    console.error('Error during fetch:', error);
+  });
+
+    }
+
+    function updateUserData()
+    {
+        // Retrieve the JSON string from sessionStorage
+        var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUser'));
+        console.log('User Profile: ', storedAppUserProfile);
+
+        // Update user nickname in the profile dropdown
+        var profileDropdownHeader = document.querySelector('.dropdown-header h6');
+        if (profileDropdownHeader) 
+        {
+          console.log('Updating user nickname.');
+          profileDropdownHeader.textContent = storedAppUserProfile.firstName + " " +storedAppUserProfile.lastName ;
+
+        } 
+        else 
+        {
+          console.log('Profile dropdown header not found.');
+        }
+
+        var profileDropdownLink = document.querySelector('.nav-link.nav-profile');
+        if (profileDropdownLink) {
+          var profileNameSpan = profileDropdownLink.querySelector('.dropdown-toggle');
+
+          console.log('Updating user profile information.');
+
+          // Update profile name
+          if (profileNameSpan) 
+          {
+          profileNameSpan.textContent = storedAppUserProfile.nickName;
+          }
+                
+        } else {
+          console.log('Profile dropdown link not found.');
+        }
+    }
+    
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+
+      var storedAppUserProfile = JSON.parse(sessionStorage.getItem('appUserProfile'));
+      var appUserId = storedAppUserProfile.appuserId;
+      
+      fetchUser(appUserId);
+    });
+
+  </script>
+
 
 </body>
 

@@ -85,7 +85,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="userProfile.html">
+              <a class="dropdown-item d-flex align-items-center" href="userProfile.html" id="userProfileLink">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -814,6 +814,17 @@
         } else {
           console.log('Profile dropdown link not found.');
         }
+
+        // Get the appUserId from the storedAppUserProfile
+      var appUserId = storedAppUserProfile.appuserId;
+
+      // Update the href attribute with the appUserId
+      var userProfileLink = document.getElementById('userProfileLink');
+      if (userProfileLink) {
+        userProfileLink.href = "userProfile.html?appUserId=" + appUserId;
+      } else {
+        console.error('User profile link not found.');
+      }
     }
     
     // Wait for the DOM to be fully loaded

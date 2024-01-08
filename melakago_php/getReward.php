@@ -12,23 +12,26 @@ $password = "@Idris123";
 $db = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
 
 // initial response code
-// response code will be changed if the request goes into any of the processes
 http_response_code(404);
 $response = new stdClass();
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    try {
-        // Fetch data from the database
-        $stmt = $db->query("SELECT * FROM reward");
-        $rewards = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Get the rewardId from the query parameters
+    $rewardId = isset($_GET['rewardId']) ? $_GET['rewardId'] : null;
 
-        // Check if there are rewards in the database
-        if ($rewards) {
+    try {
+        // Fetch data for the specified reward from the database
+        $stmt = $db->prepare("SELECT * FROM reward WHERE rewardId = ?");
+        $stmt->execute([$rewardId]);
+        $reward = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Check if the reward exists
+        if ($reward) {
             http_response_code(200);
-            $response->rewards = $rewards;
+            $response->reward = $reward;
         } else {
             http_response_code(404);
-            $response->error = "No rewards found";
+            $response->error = "Reward not found";
         }
     } catch (Exception $ee) {
         http_response_code(500);
