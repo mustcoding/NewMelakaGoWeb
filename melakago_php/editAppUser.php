@@ -67,6 +67,24 @@ if ($_SERVER["REQUEST_METHOD"] == "PUT")
 					}
 
 				}
+				else if(isset($jsonbody->email) && isset($jsonbody->password)){
+					$email = $jsonbody->email;
+					$password = $jsonbody->password;
+
+					$stmt = $db->prepare("UPDATE appuser SET password = :password WHERE email = :email");
+					$stmt->bindParam(':email', $email);
+					$stmt->bindParam(':password', $password);
+
+					$stmt->execute();
+
+					if ($stmt->rowCount() == 1) {
+						http_response_code(200);
+						$response->success = "Password updated successfully.";
+					} else {
+						http_response_code(400);  // Bad Request
+						$response->error = "Failed to update profile.";
+					}
+				}
 				else {
 					http_response_code(400);  // Bad Request
 					$response->error = "Invalid JSON format. appUserId and accessStatus are required.";

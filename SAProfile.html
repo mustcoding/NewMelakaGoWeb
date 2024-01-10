@@ -141,6 +141,20 @@
           </li>
         </ul>
     </li><!-- End Components Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#tourismServicesList" data-bs-toggle="collapse" href="rewards.html">
+        <i class="bi bi-ticket-detailed"></i><span>Company Redeemed</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="tourismServicesList" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="rewards.html">
+            <i class="bi bi-circle"></i><span>Reward Management</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Components Nav -->
+
    </ul>
 
   </aside><!-- End Sidebar-->
@@ -235,9 +249,9 @@
                   <!-- Profile Edit Form -->
                   <form onsubmit="return confirmEdit(this);">
 
-<div id="successMessage" class="alert alert-success" style="display: none;">
-  Profile successfully updated!
-</div>
+                    <div id="successMessage" class="alert alert-success" style="display: none;">
+                      Profile successfully updated!
+                    </div>
 
 
                     <div class="row mb-3">
@@ -797,6 +811,57 @@ fetch('melakago_php/editAppUser.php', {
     return false;
   }
 </script>
+
+  <script>
+    // Function to fetch tourism service data from the server
+    function fetchTourismServices() {
+      fetch('melakago_php/tourismService.php')
+        .then(response => response.json())
+        .then(data => {
+          // Call a function to update the sidebar with the fetched data
+          updateSidebar(data);
+        })
+        .catch(error => {
+          console.error('Error fetching tourism services:', error);
+        });
+    }
+
+    // Function to update the sidebar with tourism service data
+    function updateSidebar(data) {
+      const tourismServicesList = document.getElementById('tourismServicesList');
+
+      // Clear existing items
+      tourismServicesList.innerHTML = '';
+
+      // Iterate over the data and create sidebar items
+      data.forEach((item) => {
+        const listItem = document.createElement('li');
+        listItem.className = 'nav-item';
+
+        const link = document.createElement('a');
+        link.className = 'nav-link';
+        link.href = `companyRedeem.html?tourismServiceId=${item.tourismServiceId}`; // Adjust the URL as needed
+
+        const icon = document.createElement('i');
+        icon.className = 'bi bi-circle';
+
+        const span = document.createElement('span');
+        span.textContent = item.companyName;
+
+        link.appendChild(icon);
+        link.appendChild(span);
+        listItem.appendChild(link);
+
+        tourismServicesList.appendChild(listItem);
+      });
+    }
+
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fetch tourism services and update the sidebar when the page loads
+      fetchTourismServices();
+    });
+  </script>
 
 </body>
 

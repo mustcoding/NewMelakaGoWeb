@@ -117,47 +117,59 @@
 
   </header><!-- End Header -->
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+ <!-- ======= Sidebar ======= -->
+ <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="indexTAC.html">
+        <a class="nav-link " href="indexSA.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
-
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="questions.html">
-          <i class="bi bi-menu-button-wide"></i><span>Quiz Question</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="rewards.html">
+          <i class="bi bi-ticket-detailed"></i><span>Rewards</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="searchQuestion.html">
-              <i class="bi bi-circle"></i><span>Quiz Question Management</span>
+            <a href="rewards.html">
+              <i class="bi bi-circle"></i><span>Reward Management</span>
             </a>
           </li>
           <li>
-            <a href="addquestion.html">
-              <i class="bi bi-circle"></i><span>Add Question</span>
+ 
+            <a href="addrewards.html">
+              <i class="bi bi-circle"></i><span>Add Reward</span>
             </a>
           </li>
         </ul>
-      </li><!-- End Components Nav -->
-    </ul>
+    </li><!-- End Components Nav -->
 
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#tourismServicesList" data-bs-toggle="collapse" href="rewards.html">
+        <i class="bi bi-ticket-detailed"></i><span>Company Redeemed</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="tourismServicesList" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="rewards.html">
+            <i class="bi bi-circle"></i><span></span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Components Nav -->
+    </ul>
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Quiz Question Management</h1>
+      <h1>COMPANY REDEEM HISTORY</h1>
     </div><!-- End Page Title -->
 
     <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
-      Here is the question you were searching for.
+      Here is the list of redeem history.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
@@ -167,22 +179,67 @@
     </div>
 
     <div class="card">
-      <div class="card-body">
-          <h5 class="card-title">Search Question</h5>
-  
-          <form class="row g-3 align-items-center">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" class="form-control me-2" id="questionQuiz" placeholder="Enter Question Text">
-                    <button type="button" class="btn btn-primary" onclick="searchServices()">
-                        Search
-                    </button>
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="column">
+                    <h5 class="card-title">Search by Month</h5>
+        
+                    <form class="row g-3 align-items-center">
+                        <div class="col-md-6">
+                            <div class="input-group">
+        
+                                <!-- Year dropdown -->
+                                <select class="form-select" id="selectedYear">
+                                    <!-- Add the years you want to include in the dropdown -->
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <!-- Add more years as needed -->
+                                </select>
+        
+                                <!-- Replace the text input with a dropdown for selecting a month -->
+                                <select class="form-select" id="selectedMonth">
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+            
+                                <!-- You can keep the search button as it is -->
+                                <button type="button" class="btn btn-primary" onclick="searchServices()">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </form><!-- Horizontal Form -->
                 </div>
+                
+                <div class="column">
+                    <h5 class="card-title">Total Collected Point</h5>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="totalPoints" readonly>
+                    </div>
+                </div>
+
             </div>
-        </form><!-- Horizontal Form -->
-  
-      </div>
-  </div>
+           
+    
+        </div>
+    </div>
 
 
     <!-- MAIN BODY OF QUESTION -->
@@ -193,7 +250,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">
-                List of Quiz Question
+                List of Reward Redeemed
               </h5>
 
             
@@ -203,16 +260,11 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col" style="width: 150px;">Tourism Spot</th>
-                    <th scope="col" style="width: 1000px;">Question Text</th>
-                    <th scope="col" style="width: 550px;">Answer 1 </th>
-                    <th scope="col" style="width: 550px;">Answer 2 </th>
-                    <th scope="col" style="width: 550px;">Answer 3 </th>
-                    <th scope="col" style="width: 550px;">Answer 4 </th>
-                    <th scope="col" style="width: 550px;">Correct Answer </th>
-                    <th scope="col" style="width: 150px;">Points </th>
-                    <th scope="col" style="width: 350px;">Action </th>
-                    
+                    <th scope="col" style="width: 1100px;">Tourist Name</th>
+                    <th scope="col" style="width: 500px;">Reward Code</th>
+                    <th scope="col" style="width: 550px;">Reward Name </th>
+                    <th scope="col" style="width: 550px;">Date Redeem </th>
+                    <th scope="col" style="width: 550px;">Points Redeem </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -265,17 +317,38 @@
 
      // Function to fetch data from the server
     function fetchData() {
-      fetch('melakago_php/loadQuizQuestion.php')
-        .then(response => response.json())
-        .then(data => {
-          // Call a function to update the table with the fetched data
-          updateTable(data);
+
+        // Get the questionId from the URL
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const tourismServiceId = urlParams.get('tourismServiceId');
+
+      const data={
+        tourismServiceId: tourismServiceId 
+      }
+
+        fetch('melakago_php/companyRedeem.php', 
+        {
+              method: 'POST', // Use the POST method
+              headers: {
+              'Content-Type': 'application/json' // Set the content type to JSON
+              },
+              body: JSON.stringify(data) // Convert the data object to a JSON string
         })
-        .catch(error => {
-          console.error('Error fetching data:', error);
+          .then(response => response.json())
+          .then(data => {
+             // Call a function to update the table with the fetched data
+             updateTable(data);
+              
+        })
+          .catch(error => {
+              console.error('Error fetching data:', error);
         });
+
+
     }
 
+    
     function fetchUser(appUserId){
       const data = {
           appUserId : appUserId,
@@ -363,6 +436,7 @@
 
       // Clear existing rows
       tbody.innerHTML = '';
+      var totalPoints=0;
 
       
       // Iterate over the data and create rows
@@ -371,25 +445,24 @@
         
         const row = `<tr>
                       <td>${index + 1}</td>
-                      <td>${item.companyName}</td>
-                      <td>${item.questionText}</td>
-                      <td>${item.answerOption1}</td>
-                      <td>${item.answerOption2}</td>
-                      <td>${item.answerOption3}</td>
-                      <td>${item.answerOption4}</td>
-                      <td>${item.correctAnswer}</td>
-                      <td>${item.point}</td>
-                      <td>
-                        <div class="button-column">
-                          <button type="button" class="btn btn-primary" onclick="editQuestion(${item.questionId})">Edit</button>
-                          <button type="button" class="btn btn-danger" onclick="deleteQuestion(${item.questionId})">Delete </button>
-                        </div>
-                      </td>
+                      <td>${item.fullName}</td>
+                      <td>${item.rewardCode}</td>
+                      <td>${item.rewardName}</td>
+                      <td>${item.dateRedeem}</td>
+                      <td>${item.pointRedeem}</td>
                     </tr>`;
 
         // Append the row to the tbody
         tbody.innerHTML += row;
+
+        totalPoints = totalPoints+ item.pointRedeem;
       });
+
+      console.log("Total Point: ",totalPoints);
+
+      const totalPointsInput = document.getElementById('totalPoints');
+       // Set the total points in the input field
+      totalPointsInput.value = totalPoints;
     }
 
     // Wait for the DOM to be fully loaded
@@ -405,23 +478,37 @@
 
     function searchServices() {
     // Get the search term
-    var searchTerm = document.getElementById('questionQuiz').value.toLowerCase();
-    console.log('KEYWORD:',searchTerm);
+    var searchMonth= document.getElementById('selectedMonth').value;
+    var searchYear = document.getElementById('selectedYear').value;
 
     // Get all rows in the table
     var rows = document.querySelectorAll('table tbody tr');
 
     var companyFound = false;
+    var totalPoints = 0;
 
-    // Loop through each row and hide/show based on the search term
-    rows.forEach(function (row) {
-        // Update the selector to target the correct cell (company name)
-        var companyName = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+     // Loop through each row and hide/show based on the search term
+     rows.forEach(function (row) {
+        // Update the selector to target the correct cell (date)
+        var dateCell = row.querySelector('td:nth-child(5)').textContent;
+        var pointCell = row.querySelector('td:nth-child(6)').textContent;
+      
 
-        // Convert both the company name and the search term to lowercase for comparison
-        if (companyName.includes(searchTerm)) {
+        // Assuming dateCell is in the format 'YYYY-MM-DD'
+        var rowYearMonth = dateCell.split('-').slice(0, 2).join('-');
+    
+
+       // Check if the extracted year-month matches the search term
+        if (rowYearMonth === searchYear + '-' + searchMonth) {
             row.style.display = 'table-row';
             companyFound = true;
+
+            // Add the point to the total in decimal number
+            totalPoints += parseInt(pointCell, 10);
+            
+            const totalPointsInput = document.getElementById('totalPoints');
+            // Set the total points in the input field
+            totalPointsInput.value = totalPoints;
         } else {
             row.style.display = 'none';
         }
@@ -472,9 +559,57 @@
         
     }
 
+  </script>
 
+<script>
+    // Function to fetch tourism service data from the server
+    function fetchTourismServices() {
+      fetch('melakago_php/tourismService.php')
+        .then(response => response.json())
+        .then(data => {
+          // Call a function to update the sidebar with the fetched data
+          updateSidebar(data);
+        })
+        .catch(error => {
+          console.error('Error fetching tourism services:', error);
+        });
+    }
 
+    // Function to update the sidebar with tourism service data
+    function updateSidebar(data) {
+      const tourismServicesList = document.getElementById('tourismServicesList');
 
+      // Clear existing items
+      tourismServicesList.innerHTML = '';
+
+      // Iterate over the data and create sidebar items
+      data.forEach((item) => {
+        const listItem = document.createElement('li');
+        listItem.className = 'nav-item';
+
+        const link = document.createElement('a');
+        link.className = 'nav-link';
+        link.href = `companyRedeem.html?tourismServiceId=${item.tourismServiceId}`; // Adjust the URL as needed
+
+        const icon = document.createElement('i');
+        icon.className = 'bi bi-circle';
+
+        const span = document.createElement('span');
+        span.textContent = item.companyName;
+
+        link.appendChild(icon);
+        link.appendChild(span);
+        listItem.appendChild(link);
+
+        tourismServicesList.appendChild(listItem);
+      });
+    }
+
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fetch tourism services and update the sidebar when the page loads
+      fetchTourismServices();
+    });
   </script>
 
 </body>

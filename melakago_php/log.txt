@@ -1,0 +1,1 @@
+{"rewardName":"City Tour Package ","rewardPoint":"500","rewardCode":"RW001","tnc":"Valid for one person. Advanced booking required. subject to availability.","tourismServiceId":"21"}

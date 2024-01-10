@@ -31,22 +31,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             isset($jsonbody->rewardName) &&
             isset($jsonbody->rewardPoint) &&
             isset($jsonbody->rewardCode) &&
-            isset($jsonbody->tnc)) {
+            isset($jsonbody->tnc) &&
+            isset($jsonbody->tourismServiceId)) {
 
             $rewardName = $jsonbody->rewardName;
             $rewardPoint = $jsonbody->rewardPoint;  
             $rewardCode = $jsonbody->rewardCode;
             $tnc = $jsonbody->tnc; 
+            $tourismServiceId = $jsonbody->tourismServiceId; 
 
             // Perform database insertion
-            $stmt = $db->prepare("INSERT INTO reward (rewardname, rewardpoint, rewardcode, tnc) 
-                                   VALUES  (:rewardName, :rewardPoint, :rewardCode, :tnc)");
+            $stmt = $db->prepare("INSERT INTO reward (rewardname, rewardpoint, rewardcode, tnc, tourismServiceId) 
+                                   VALUES  (:rewardName, :rewardPoint, :rewardCode, :tnc, :tourismServiceId)");
 
             $stmt->execute([
                 'rewardName' => $rewardName,
                 'rewardPoint' => $rewardPoint,
                 'rewardCode' => $rewardCode,
                 'tnc' => $tnc,
+                'tourismServiceId' => $tourismServiceId,
             ]);
 
             http_response_code(200);

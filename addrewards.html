@@ -143,6 +143,19 @@
         </ul>
        </li><!-- End Components Nav -->
 
+       <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tourismServicesList" data-bs-toggle="collapse" href="rewards.html">
+          <i class="bi bi-ticket-detailed"></i><span>Company Redeemed</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tourismServicesList" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="rewards.html">
+              <i class="bi bi-circle"></i><span>Reward Management</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -160,19 +173,20 @@
                 <div class="card-body">
                   <h5 class="card-title">Reward Details</h5>
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
-      Reward have been succesfully added.
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+                    Reward have been succesfully added.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
 
-    <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
-      Reward fail to add
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-danger" style="display: none;">
-  Please fill in all required fields.
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
+                    Reward fail to add
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert-danger" style="display: none;">
+                    Please fill in all required fields.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
 
     
                   <!-- Custom Styled Validation -->
@@ -244,6 +258,21 @@
                               </div>
                         </div>
                       </div>
+
+                      <div class="col-12">
+                        <label for="validationDefault04" class="form-label">Assigned Tourism Service</label>
+                        <select class="form-select" id="companyName" required>
+
+                            <option selected> </option>
+
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                          </div>
+                        <div class="invalid-feedback">
+                            Please select a valid points!
+                          </div>
+                      </div>
                     
                     <div class="col-12">
                       <label for="validationCustom02" class="form-label">Terms & Conditions</label>
@@ -257,9 +286,9 @@
                     </div>
                     
                     <div class="text-center">
-    			<button type="button" class="btn btn-primary" onclick="saveReward()">Save</button>
-    			<button type="button" class="btn btn-secondary" onclick="returnToIndex()">Cancel</button>
-                      </div>
+                        <button type="button" class="btn btn-primary" onclick="saveReward(value)">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="returnToIndex()">Cancel</button>
+                    </div>
                   </form><!-- End Custom Styled Validation -->
     
                 </div>
@@ -308,6 +337,9 @@ function saveReward() {
     var rewardPoint = document.getElementById('validationDefault04').value;
     var rewardCode = document.getElementById('validationDefault02').value;
     var tnc = document.getElementById('validationCustom02').value;
+    var tourismServiceId = document.getElementById('companyName').value;
+
+    console.log("ID: ", tourismServiceId);
 
     // Send data to the server using AJAX
     $.ajax({
@@ -318,7 +350,8 @@ function saveReward() {
         rewardName: rewardName,
         rewardPoint: rewardPoint,
         rewardCode: rewardCode,
-        tnc: tnc
+        tnc: tnc,
+        tourismServiceId: tourismServiceId
       }),
       success: function (response) {
         console.log(response);
@@ -381,6 +414,54 @@ function saveReward() {
       window.open('rewards.html','_self');
     }
   </script>
+
+  <script>
+    // Function to fetch data of tourism service from the server
+    function fetchData() {
+      fetch('melakago_php/tourismService.php')
+        .then(response => response.json())
+        .then(data => {
+          // Call a function to update the table with the fetched data
+          console.log("DATA: ", data);
+          updateTable(data);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    }
+
+    // Function to update the table with data
+    function updateTable(data) {
+      const companyName = document.getElementById('companyName');
+
+      // Clear existing rows
+      companyName.innerHTML = '';
+
+      // Add a default option
+      const defaultOption = document.createElement('option');
+      defaultOption.selected = true;
+      companyName.appendChild(defaultOption);
+
+      
+      // Iterate over the data and create rows
+      data.forEach((item, index) => 
+      {
+        const option = document.createElement('option');
+        option.value = item.tourismServiceId;
+        option.textContent = item.companyName;
+        companyName.appendChild(option);
+      });
+      
+    }
+
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fetch data when the page loads
+      fetchData();
+    });
+
+  </script>
+
  <script>
 
     function fetchUser(appUserId)
@@ -484,6 +565,57 @@ function saveReward() {
       fetchUser(appUserId);
     });
 
+  </script>
+
+  <script>
+    // Function to fetch tourism service data from the server
+    function fetchTourismServices() {
+      fetch('melakago_php/tourismService.php')
+        .then(response => response.json())
+        .then(data => {
+          // Call a function to update the sidebar with the fetched data
+          updateSidebar(data);
+        })
+        .catch(error => {
+          console.error('Error fetching tourism services:', error);
+        });
+    }
+
+    // Function to update the sidebar with tourism service data
+    function updateSidebar(data) {
+      const tourismServicesList = document.getElementById('tourismServicesList');
+
+      // Clear existing items
+      tourismServicesList.innerHTML = '';
+
+      // Iterate over the data and create sidebar items
+      data.forEach((item) => {
+        const listItem = document.createElement('li');
+        listItem.className = 'nav-item';
+
+        const link = document.createElement('a');
+        link.className = 'nav-link';
+        link.href = `companyRedeem.html?tourismServiceId=${item.tourismServiceId}`; // Adjust the URL as needed
+
+        const icon = document.createElement('i');
+        icon.className = 'bi bi-circle';
+
+        const span = document.createElement('span');
+        span.textContent = item.companyName;
+
+        link.appendChild(icon);
+        link.appendChild(span);
+        listItem.appendChild(link);
+
+        tourismServicesList.appendChild(listItem);
+      });
+    }
+
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function () {
+      // Fetch tourism services and update the sidebar when the page loads
+      fetchTourismServices();
+    });
   </script>
 
 
