@@ -99,7 +99,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="login.html">
+              <a class="dropdown-item d-flex align-items-center" href="#" onClick="signOut()">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -616,6 +616,25 @@ function saveReward() {
       // Fetch tourism services and update the sidebar when the page loads
       fetchTourismServices();
     });
+  </script>
+
+  <script>
+
+    function signOut()
+    {
+
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+
+          // Clear the session storage
+      sessionStorage.clear();
+
+      // Redirect to the login page
+      window.location.replace('login.html');
+    }
+
   </script>
 
 

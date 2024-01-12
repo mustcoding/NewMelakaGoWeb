@@ -96,7 +96,7 @@
               <hr class="dropdown-divider">
             </li>
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="#" onClick="signOut()">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -862,6 +862,25 @@
       
       fetchUser(appUserId);
     });
+
+  </script>
+
+  <script>
+
+    function signOut()
+    {
+
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+
+          // Clear the session storage
+      sessionStorage.clear();
+
+      // Redirect to the login page
+      window.location.replace('login.html');
+    }
 
   </script>
 
