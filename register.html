@@ -57,6 +57,15 @@
                     }
                 </style>
 
+              <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
+                New Account has successfully registered.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+              <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
+                Houston....The email is already being registered.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
 
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
@@ -398,6 +407,8 @@
           var accessStatus = "ACTIVE";
           var points = 0;
 
+          var success=false;
+
           if (formSubmitted) 
           {
             return;  // If the form has already been submitted, do nothing
@@ -425,7 +436,18 @@
             success: function(response) {
               console.log('Response:',response);
 
-              window.location.href = 'login.html';
+               // Check if the parsed JSON contains a key indicating an error
+                if (response && response.error && response.error.toLowerCase().includes("email is already registered")) {
+                    document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+                    document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+                } else {
+                    // Assuming the response is successful
+                    document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+                    document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+                    setTimeout(function () {
+                        window.location.href = 'login.html';
+                    }, 1000);
+                }
                 
             },
             error: function(jqXHR, textStatus, errorThrown) {
