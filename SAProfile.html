@@ -282,9 +282,9 @@
                     </div>
 
                     <div class="text-center">
-			<button type="submit" class="btn btn-primary" onClick="confirmEdit(this.form)">Save Changes</button>
+			                <button type="submit" class="btn btn-primary" onClick="confirmEdit(this.form)">Save Changes</button>
                     
-		    </div>
+		                 </div>
                   </form><!-- End Profile Edit Form -->
 
                 </div>
@@ -563,32 +563,33 @@
           email: email,
       };
 
-fetch('melakago_php/editAppUser.php', {
-  method: 'PUT',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(data),
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Handle successful response
-  })
-  .catch(error => {
-    console.error('Fetch error:', error);
-  });
+      fetch('melakago_php/editAppUser.php', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Handle successful response
+          fetchNewData(appUserId);
+        })
+        .catch(error => {
+          console.error('Fetch error:', error);
+        });
 
-  // Show the success message
-  var successMessageElement = document.getElementById('successMessage');
-  if (successMessageElement) {
-    successMessageElement.style.display = 'block';
-  }
-      return false;
+        // Show the success message
+        var successMessageElement = document.getElementById('successMessage');
+        if (successMessageElement) {
+          successMessageElement.style.display = 'block';
+        }
+       return false;
     }
   </script>
 
