@@ -167,7 +167,7 @@
     </div>
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
-      Houston... we got problem.
+      Houston... we can't find the question you search for.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
@@ -211,15 +211,21 @@
                     <th scope="col" style="width: 1000px;">Tourism Spot</th>
                     <th scope="col" style="width: 550px;">Total Qr Spot</th>
                     <th scope="col" style="width: 550px;">Total Questions</th>
-                    
                   </tr>
+                  
                 </thead>
                 <tbody>
                   <tr>
-                   
+          
                     </td>
                   </tr>
                 </tbody>
+                  <!-- Add this row at the end of your table body -->
+                  <tr id="totalRow">
+                    <td colspan="2" style="text-align: right;"><strong>Total:</strong></td>
+                    <td id="totalQrSpot"></td>
+                    <td id="totalQuestions"></td>
+                  </tr>
               </table>
               <!-- End Default Table Example -->
             </div>
@@ -269,6 +275,8 @@
         .then(data => {
           // Call a function to update the table with the fetched data
           updateTable(data);
+          // Call the function to update the totals
+          updateTotals(data);
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -392,37 +400,38 @@
 
 
     function searchServices() {
-    // Get the search term
-    var searchTerm = document.getElementById('tourismService').value.toLowerCase();
-    console.log('KEYWORD:',searchTerm);
+      // Get the search term
+      var searchTerm = document.getElementById('tourismService').value.toLowerCase();
+      console.log('KEYWORD:',searchTerm);
 
-    // Get all rows in the table
-    var rows = document.querySelectorAll('table tbody tr');
+      // Get all rows in the table
+      var rows = document.querySelectorAll('table tbody tr');
 
-    var companyFound = false;
+      var companyFound = false;
 
-    // Loop through each row and hide/show based on the search term
-    rows.forEach(function (row) {
-        // Update the selector to target the correct cell (company name)
-        var companyName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+      // Loop through each row and hide/show based on the search term
+      rows.forEach(function (row) {
+          // Update the selector to target the correct cell (company name)
+          var companyName = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
 
-        // Convert both the company name and the search term to lowercase for comparison
-        if (companyName.includes(searchTerm)) {
-            row.style.display = 'table-row';
-            companyFound = true;
-        } else {
-            row.style.display = 'none';
-        }
-    });
+          // Convert both the company name and the search term to lowercase for comparison
+          if (companyName.includes(searchTerm)) {
+              row.style.display = 'table-row';
+              companyFound = true;
+          } else {
+              row.style.display = 'none';
+          }
+      });
 
-    if(companyFound){
-      document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
-      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
-    }
-    else{
-      document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
-      document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
-    }
+      if(companyFound){
+        document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+        document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+      }
+      else{
+        document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'none';
+        document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+      }
+      updateTotals();
    } 
 
     function displayAddQuestionPage(){
@@ -482,6 +491,22 @@
       window.location.replace('login.html');
     }
 
+  </script>
+
+  <script>
+    // Add this function to calculate and update totals
+    function updateTotals(data) {
+      const totalQrSpotElement = document.getElementById('totalQrSpot');
+      const totalQuestionsElement = document.getElementById('totalQuestions');
+
+      // Calculate totals
+      const totalQrSpot = data.reduce((total, item) => total + item.totalqrSpot, 0);
+      const totalQuestions = data.reduce((total, item) => total + item.totalQuestion, 0);
+
+      // Update the HTML content
+      totalQrSpotElement.textContent = totalQrSpot;
+      totalQuestionsElement.textContent = totalQuestions;
+    }
   </script>
 
 </body>

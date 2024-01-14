@@ -142,12 +142,17 @@
   <main id="main" class="main">
 
     <div class="alert alert-success alert-dismissible fade show" role="alert1" style="display: none;">
-      New Question has successfully being saved.
+      Tourism Service has successfully being saved.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
     <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
       Houston....Please insert all information needed.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert3" style="display: none;">
+      Houston....Please select atleast 1 image.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
@@ -497,9 +502,6 @@
           // Read the file as Data URL (base64 encoding)
           reader.readAsDataURL(file);
         }
-      } else {
-        // No files selected
-        console.error('Please select at least one picture.');
       }
     }
   </script>
@@ -653,18 +655,24 @@
             if (base64Images.length === files.length) {
               sendImagesToServer(tourismServiceId, base64Images);
             }
+           
           };
 
           // Read the file as Data URL (base64 encoding)
           reader.readAsDataURL(file);
         }
-      } else {
-        // No files selected
-        console.error('Please select at least one picture.');
+      }
+      else
+      {
+        setTimeout(function () {
+          window.location.href = "searchServices.html";
+        }, 1000);
       }
     }
 
     function sendImagesToServer(tourismServiceId, base64Images) {
+
+      var isSaved=false;
       // Create an object to hold the data you want to send
       const data = {
         image: base64Images,
@@ -680,10 +688,17 @@
       })
         .then(response => response.json())
         .then(data => {
+          isSaved=true;
           // Handle the response from the server
           console.log('Images successfully saved:', data);
-          window.location.href = "searchServices.html";
-          
+
+          if(isSaved){
+            document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
+            document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'none';
+            setTimeout(function () {
+              window.location.href = "searchServices.html";
+              }, 1000);
+          }
         })
         .catch(error => {
           console.error('Error saving images:', error);

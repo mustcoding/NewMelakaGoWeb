@@ -36,6 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         qrspot b ON b.tourismServiceId = a.tourismServiceId
     JOIN
         quizquestion c ON b.qrId = c.qrId
+        
+    where c.isDelete=0
+
     GROUP BY
         a.companyName
         ");

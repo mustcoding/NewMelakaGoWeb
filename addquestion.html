@@ -714,68 +714,68 @@
 </script>
 
   <!-- Add this script after your existing scripts -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Select the input fields
-      const answerOption1 = document.getElementById('answerOption1');
-      const answerOption2 = document.getElementById('answerOption2');
-      const answerOption3 = document.getElementById('answerOption3');
-      const answerOption4 = document.getElementById('answerOption4');
-      const correctAnswerDropdown = document.getElementById('correctAnswer');
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Select the input fields
+        const answerOption1 = document.getElementById('answerOption1');
+        const answerOption2 = document.getElementById('answerOption2');
+        const answerOption3 = document.getElementById('answerOption3');
+        const answerOption4 = document.getElementById('answerOption4');
+        const correctAnswerDropdown = document.getElementById('correctAnswer');
 
-      // Add event listeners to each answer option input field
-      answerOption1.addEventListener('input', updateCorrectAnswerOptions);
-      answerOption2.addEventListener('input', updateCorrectAnswerOptions);
-      answerOption3.addEventListener('input', updateCorrectAnswerOptions);
-      answerOption4.addEventListener('input', updateCorrectAnswerOptions);
+        // Add event listeners to each answer option input field
+        answerOption1.addEventListener('input', updateCorrectAnswerOptions);
+        answerOption2.addEventListener('input', updateCorrectAnswerOptions);
+        answerOption3.addEventListener('input', updateCorrectAnswerOptions);
+        answerOption4.addEventListener('input', updateCorrectAnswerOptions);
 
-      // Function to update the options of the correctAnswer dropdown
-      function updateCorrectAnswerOptions() {
-        // Get the values from the answer option input fields
-        const option1Value = answerOption1.value.trim();
-        const option2Value = answerOption2.value.trim();
-        const option3Value = answerOption3.value.trim();
-        const option4Value = answerOption4.value.trim();
+        // Function to update the options of the correctAnswer dropdown
+        function updateCorrectAnswerOptions() {
+          // Get the values from the answer option input fields
+          const option1Value = answerOption1.value.trim();
+          const option2Value = answerOption2.value.trim();
+          const option3Value = answerOption3.value.trim();
+          const option4Value = answerOption4.value.trim();
 
-        // Clear existing options
-        correctAnswerDropdown.innerHTML = '';
+          // Clear existing options
+          correctAnswerDropdown.innerHTML = '';
 
-        // Add default option
-        const defaultOption = document.createElement('option');
-        defaultOption.selected = true;
-        correctAnswerDropdown.appendChild(defaultOption);
+          // Add default option
+          const defaultOption = document.createElement('option');
+          defaultOption.selected = true;
+          correctAnswerDropdown.appendChild(defaultOption);
 
-        // Add new options based on the answer option values
-        if (option1Value !== '') {
-          const option1 = document.createElement('option');
-          option1.value = 'answerOption1';
-          option1.textContent = option1Value;
-          correctAnswerDropdown.appendChild(option1);
+          // Add new options based on the answer option values
+          if (option1Value !== '') {
+            const option1 = document.createElement('option');
+            option1.value = option1Value;
+            option1.textContent = option1Value;
+            correctAnswerDropdown.appendChild(option1);
+          }
+
+          if (option2Value !== '') {
+            const option2 = document.createElement('option');
+            option2.value = option2Value;
+            option2.textContent = option2Value;
+            correctAnswerDropdown.appendChild(option2);
+          }
+
+          if (option3Value !== '') {
+            const option3 = document.createElement('option');
+            option3.value = option3Value;
+            option3.textContent = option3Value;
+            correctAnswerDropdown.appendChild(option3);
+          }
+
+          if (option4Value !== '') {
+            const option4 = document.createElement('option');
+            option4.value = option4Value;
+            option4.textContent = option4Value;
+            correctAnswerDropdown.appendChild(option4);
+          }
         }
-
-        if (option2Value !== '') {
-          const option2 = document.createElement('option');
-          option2.value = 'answerOption2';
-          option2.textContent = option2Value;
-          correctAnswerDropdown.appendChild(option2);
-        }
-
-        if (option3Value !== '') {
-          const option3 = document.createElement('option');
-          option3.value = 'answerOption3';
-          option3.textContent = option3Value;
-          correctAnswerDropdown.appendChild(option3);
-        }
-
-        if (option4Value !== '') {
-          const option4 = document.createElement('option');
-          option4.value = 'answerOption4';
-          option4.textContent = option4Value;
-          correctAnswerDropdown.appendChild(option4);
-        }
-      }
-    });
-  </script>
+      });
+    </script>
 
 
 

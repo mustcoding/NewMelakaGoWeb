@@ -261,7 +261,6 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col" style="width: 1100px;">Tourist Name</th>
-                    <th scope="col" style="width: 500px;">Reward Code</th>
                     <th scope="col" style="width: 550px;">Reward Name </th>
                     <th scope="col" style="width: 550px;">Date Redeem </th>
                     <th scope="col" style="width: 550px;">Points Redeem </th>
@@ -456,7 +455,6 @@
         const row = `<tr>
                       <td>${index + 1}</td>
                       <td>${item.fullName}</td>
-                      <td>${item.rewardCode}</td>
                       <td>${item.rewardName}</td>
                       <td>${item.dateRedeem}</td>
                       <td>${item.pointRedeem}</td>
@@ -500,8 +498,8 @@
      // Loop through each row and hide/show based on the search term
      rows.forEach(function (row) {
         // Update the selector to target the correct cell (date)
-        var dateCell = row.querySelector('td:nth-child(5)').textContent;
-        var pointCell = row.querySelector('td:nth-child(6)').textContent;
+        var dateCell = row.querySelector('td:nth-child(4)').textContent;
+        var pointCell = row.querySelector('td:nth-child(5)').textContent;
       
 
         // Assuming dateCell is in the format 'YYYY-MM-DD'
