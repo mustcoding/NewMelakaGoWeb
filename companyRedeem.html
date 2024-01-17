@@ -485,6 +485,7 @@
 
 
     function searchServices() {
+    
     // Get the search term
     var searchMonth= document.getElementById('selectedMonth').value;
     var searchYear = document.getElementById('selectedYear').value;
@@ -514,13 +515,14 @@
             // Add the point to the total in decimal number
             totalPoints += parseInt(pointCell, 10);
             
-            const totalPointsInput = document.getElementById('totalPoints');
-            // Set the total points in the input field
-            totalPointsInput.value = totalPoints;
         } else {
             row.style.display = 'none';
         }
     });
+
+    // Update total points only once after the loop
+    const totalPointsInput = document.getElementById('totalPoints');
+    totalPointsInput.value = totalPoints;
 
     if(companyFound){
       document.querySelector('.alert.alert-success.alert-dismissible.fade.show[role="alert1"]').style.display = 'block';
