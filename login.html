@@ -55,6 +55,11 @@
                 }
               </style>
 
+              <div class="alert alert-danger alert-dismissible fade show" role="alert2" style="display: none;">
+                Houston....Email or Password Wrong !!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
               <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/MelakaGo.png" alt="">
@@ -200,14 +205,18 @@
               }
 
             }
+            else{
+              document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+            }
               
           },
           error: function(jqXHR, textStatus, errorThrown) {
 
               if (jqXHR.status === 401) 
               {
-              // Unauthorized, redirect to indexMain.html
-                window.location.href = 'login.html';
+        
+                document.querySelector('.alert.alert-danger.alert-dismissible.fade.show[role="alert2"]').style.display = 'block';
+                
               } else {
                 // Handle other errors
                 console.error('AJAX Error:', textStatus, errorThrown);
